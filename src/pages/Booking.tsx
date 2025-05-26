@@ -47,10 +47,10 @@ const Booking = () => {
       <div className="relative z-10">
         <Header onCartOpen={() => {}} />
         
-        <main className="pt-32 pb-20 px-6">
+        <main className="pt-20 md:pt-32 pb-12 md:pb-20 px-4 md:px-6">
           <div className="max-w-7xl mx-auto">
-            <div className="max-w-2xl mb-12">
-              <h1 className="text-6xl md:text-7xl font-bold leading-tight mb-6">
+            <div className="max-w-full lg:max-w-2xl mb-8 md:mb-12">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 md:mb-6">
                 Car Washing
                 <br />
                 Online Booking
@@ -60,14 +60,14 @@ const Booking = () => {
               
               <Button 
                 size="lg"
-                className="bg-green-400 hover:bg-green-500 text-black font-semibold px-8 py-4 text-lg"
+                className="bg-green-400 hover:bg-green-500 text-black font-semibold px-6 md:px-8 py-3 md:py-4 text-base md:text-lg w-full sm:w-auto"
               >
                 START BOOKING
               </Button>
             </div>
 
             {/* Services Overview */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
               {[
                 { icon: "❄️", title: "Contactless Washing", rating: 4 },
                 { icon: "🛡️", title: "Safety Materials", rating: 5 },
@@ -75,13 +75,13 @@ const Booking = () => {
                 { icon: "🌪️", title: "Extensive Cleaning", rating: 4 }
               ].map((service, index) => (
                 <Card key={index} className="bg-gray-800/80 border-gray-700">
-                  <CardContent className="p-6 text-center">
-                    <div className="text-4xl mb-4">{service.icon}</div>
-                    <h3 className="text-green-400 font-semibold text-lg mb-3">{service.title}</h3>
-                    <p className="text-gray-300 text-sm mb-4">Vestibulum tortor risus, rutrum at congue sed ultricies finibus.</p>
+                  <CardContent className="p-4 md:p-6 text-center">
+                    <div className="text-3xl md:text-4xl mb-3 md:mb-4">{service.icon}</div>
+                    <h3 className="text-green-400 font-semibold text-base md:text-lg mb-2 md:mb-3">{service.title}</h3>
+                    <p className="text-gray-300 text-xs md:text-sm mb-3 md:mb-4">Vestibulum tortor risus, rutrum at congue sed ultricies finibus.</p>
                     <div className="flex justify-center space-x-1">
                       {[...Array(5)].map((_, i) => (
-                        <span key={i} className={`text-sm ${i < service.rating ? 'text-green-400' : 'text-gray-600'}`}>★</span>
+                        <span key={i} className={`text-xs md:text-sm ${i < service.rating ? 'text-green-400' : 'text-gray-600'}`}>★</span>
                       ))}
                     </div>
                   </CardContent>
@@ -93,7 +93,7 @@ const Booking = () => {
             <BookingSteps currentStep={currentStep} />
 
             {/* Step Content */}
-            <div className="mt-12">
+            <div className="mt-8 md:mt-12">
               {currentStep === 1 && (
                 <CarSelection 
                   selectedCar={selectedCar} 
@@ -118,10 +118,10 @@ const Booking = () => {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="flex justify-between mt-8">
+            <div className="flex flex-col sm:flex-row justify-between gap-4 mt-8">
               <Button 
                 variant="outline"
-                className="border-green-400 text-green-400 hover:bg-green-400 hover:text-black"
+                className="border-green-400 text-green-400 hover:bg-green-400 hover:text-black w-full sm:w-auto"
                 onClick={handlePrevStep}
                 disabled={currentStep === 1}
               >
@@ -130,7 +130,7 @@ const Booking = () => {
               </Button>
               
               <Button 
-                className="bg-green-400 hover:bg-green-500 text-black"
+                className="bg-green-400 hover:bg-green-500 text-black w-full sm:w-auto"
                 onClick={handleNextStep}
                 disabled={currentStep === 4}
               >

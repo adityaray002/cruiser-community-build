@@ -26,11 +26,11 @@ const Cart = ({ isOpen, onClose }: CartProps) => {
   
   return (
     <div className="fixed inset-0 z-50 bg-black/50">
-      <div className="absolute right-0 top-0 h-full w-96 bg-gray-900 p-6">
+      <div className="absolute right-0 top-0 h-full w-full sm:w-96 bg-gray-900 p-4 md:p-6 overflow-y-auto">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-white">Cart</h2>
-          <Button variant="ghost" size="icon" onClick={onClose}>
-            <X className="h-5 w-5 text-white" />
+          <h2 className="text-lg md:text-xl font-semibold text-white">Cart</h2>
+          <Button variant="ghost" size="icon" onClick={onClose} className="h-8 w-8 md:h-10 md:w-10">
+            <X className="h-4 w-4 md:h-5 md:w-5 text-white" />
           </Button>
         </div>
         
@@ -45,17 +45,17 @@ const Cart = ({ isOpen, onClose }: CartProps) => {
                     <Button 
                       variant="ghost" 
                       size="icon"
-                      className="text-white hover:text-red-400"
+                      className="text-white hover:text-red-400 h-6 w-6 md:h-8 md:w-8"
                       onClick={() => removeItem(item.id)}
                     >
-                      <X className="h-4 w-4" />
+                      <X className="h-3 w-3 md:h-4 md:w-4" />
                     </Button>
                     <div>
-                      <p className="text-white font-medium">{item.name}</p>
-                      <p className="text-gray-400 text-sm">{item.quantity}X ${item.price.toFixed(2)}</p>
+                      <p className="text-white font-medium text-sm md:text-base">{item.name}</p>
+                      <p className="text-gray-400 text-xs md:text-sm">{item.quantity}X ${item.price.toFixed(2)}</p>
                     </div>
                   </div>
-                  <div className="w-16 h-12 bg-gray-700 rounded"></div>
+                  <div className="w-12 h-8 md:w-16 md:h-12 bg-gray-700 rounded"></div>
                 </div>
               ))}
             </div>
@@ -70,11 +70,11 @@ const Cart = ({ isOpen, onClose }: CartProps) => {
             <div className="space-y-3">
               <Button 
                 variant="outline" 
-                className="w-full text-white border-gray-600 hover:bg-gray-800"
+                className="w-full text-white border-gray-600 hover:bg-gray-800 h-12"
               >
                 View Cart
               </Button>
-              <Button className="w-full bg-green-400 hover:bg-green-500 text-black">
+              <Button className="w-full bg-green-400 hover:bg-green-500 text-black h-12">
                 Checkout
               </Button>
             </div>
