@@ -1,15 +1,32 @@
 
 interface BookingStepsProps {
   currentStep: number;
+  selectedServiceType: string;
 }
 
-const BookingSteps = ({ currentStep }: BookingStepsProps) => {
-  const steps = [
-    { number: 1, title: "Select Car", subtitle: "Sedan" },
-    { number: 2, title: "Washing Plan", subtitle: "INR99 / Month" },
-    { number: 3, title: "Additional Services", subtitle: "Add-ons" },
-    { number: 4, title: "Date and Time", subtitle: "Schedule" }
-  ];
+const BookingSteps = ({ currentStep, selectedServiceType }: BookingStepsProps) => {
+  const getSteps = () => {
+    const baseSteps = [
+      { number: 1, title: "Select Car", subtitle: "Vehicle Type" },
+      { number: 2, title: "Service Type", subtitle: "Monthly/One-time" },
+    ];
+
+    if (selectedServiceType === 'monthly') {
+      return [
+        ...baseSteps,
+        { number: 3, title: "Washing Plan", subtitle: "INR99 / Month" },
+        { number: 4, title: "Book Now", subtitle: "Confirm" }
+      ];
+    } else {
+      return [
+        ...baseSteps,
+        { number: 3, title: "Additional Services", subtitle: "Add-ons" },
+        { number: 4, title: "Book Now", subtitle: "Confirm" }
+      ];
+    }
+  };
+
+  const steps = getSteps();
 
   return (
     <div className="mb-8 md:mb-12">
