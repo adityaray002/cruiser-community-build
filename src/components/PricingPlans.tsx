@@ -63,51 +63,53 @@ const PricingPlans = ({ selectedPlan, onPlanSelect }: PricingPlansProps) => {
   return (
     <div>
       {/* Mobile View */}
-      <div className="md:hidden space-y-4">
-        {plans.map((plan, index) => (
-          <Card 
-            key={index} 
-            className={`cursor-pointer transition-all ${
-              selectedPlan === plan.name
-                ? 'bg-gray-700 border-green-400' 
-                : plan.highlighted 
-                ? 'bg-gray-700 border-green-400' 
-                : 'bg-gray-800 border-gray-600 hover:border-gray-500'
-            }`}
-            onClick={() => onPlanSelect(plan.name)}
-          >
-            <CardContent className="p-4">
-              <div className="text-center mb-4">
-                <span className="text-lg font-bold text-white">{plan.currency}</span>
-                <span className="text-3xl font-bold text-white">{plan.price}</span>
-                <span className="text-gray-400">/month</span>
-              </div>
-              
-              <h3 className="text-green-400 font-semibold text-base text-center mb-4">
-                {plan.name}
-              </h3>
-              
-              <div className="space-y-2 mb-4">
-                {plan.features.map((feature, i) => (
-                  <div key={i} className="flex items-center text-xs text-gray-300">
-                    <span className="text-green-400 mr-2">✓</span>
-                    {feature}
-                  </div>
-                ))}
-              </div>
-              
-              <Button 
-                className={`w-full ${
-                  selectedPlan === plan.name
-                    ? 'bg-green-400 hover:bg-green-500 text-black' 
-                    : 'bg-gray-600 hover:bg-gray-500 text-white'
-                }`}
-              >
-                {selectedPlan === plan.name ? 'Selected' : 'Select Plan'}
-              </Button>
-            </CardContent>
-          </Card>
-        ))}
+      <div className="md:hidden">
+        <div className="grid grid-cols-2 gap-3">
+          {plans.map((plan, index) => (
+            <Card 
+              key={index} 
+              className={`cursor-pointer transition-all ${
+                selectedPlan === plan.name
+                  ? 'bg-gray-700 border-green-400' 
+                  : plan.highlighted 
+                  ? 'bg-gray-700 border-green-400' 
+                  : 'bg-gray-800 border-gray-600 hover:border-gray-500'
+              }`}
+              onClick={() => onPlanSelect(plan.name)}
+            >
+              <CardContent className="p-3">
+                <div className="text-center mb-3">
+                  <span className="text-sm font-bold text-white">{plan.currency}</span>
+                  <span className="text-xl font-bold text-white">{plan.price}</span>
+                  <span className="text-xs text-gray-400">/month</span>
+                </div>
+                
+                <h3 className="text-green-400 font-semibold text-xs text-center mb-3">
+                  {plan.name}
+                </h3>
+                
+                <div className="space-y-1 mb-3">
+                  {plan.features.map((feature, i) => (
+                    <div key={i} className="flex items-center text-xs text-gray-300">
+                      <span className="text-green-400 mr-1 text-xs">✓</span>
+                      <span className="text-xs leading-tight">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <Button 
+                  className={`w-full text-xs py-1 h-8 ${
+                    selectedPlan === plan.name
+                      ? 'bg-green-400 hover:bg-green-500 text-black' 
+                      : 'bg-gray-600 hover:bg-gray-500 text-white'
+                  }`}
+                >
+                  {selectedPlan === plan.name ? 'Selected' : 'Select'}
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
 
       {/* Desktop View */}
