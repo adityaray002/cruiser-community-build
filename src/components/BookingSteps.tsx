@@ -9,18 +9,18 @@ const BookingSteps = ({ currentStep, selectedServiceType }: BookingStepsProps) =
     const baseSteps = [
       { number: 1, title: "Select Car", subtitle: "Vehicle Type" },
       { number: 2, title: "Service Type", subtitle: "Monthly/One-time" },
+      { number: 3, title: "Washing Plan", subtitle: "Choose Plan" },
     ];
 
-    if (selectedServiceType === 'monthly') {
+    if (selectedServiceType === 'one-time') {
       return [
         ...baseSteps,
-        { number: 3, title: "Washing Plan", subtitle: "INR99 / Month" },
-        { number: 4, title: "Book Now", subtitle: "Confirm" }
+        { number: 4, title: "Additional Services", subtitle: "Add-ons" },
+        { number: 5, title: "Book Now", subtitle: "Confirm" }
       ];
     } else {
       return [
         ...baseSteps,
-        { number: 3, title: "Additional Services", subtitle: "Add-ons" },
         { number: 4, title: "Book Now", subtitle: "Confirm" }
       ];
     }

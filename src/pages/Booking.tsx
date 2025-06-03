@@ -14,14 +14,14 @@ const Booking = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedCar, setSelectedCar] = useState("Sedan");
   const [selectedServiceType, setSelectedServiceType] = useState("monthly");
-  const [selectedPlan, setSelectedPlan] = useState("Marketing License");
+  const [selectedPlan, setSelectedPlan] = useState("");
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
 
   const handleNextStep = () => {
-    if (currentStep < 4) {
+    const maxSteps = selectedServiceType === 'one-time' ? 5 : 4;
+    if (currentStep < maxSteps) {
       setCurrentStep(currentStep + 1);
-    } else if (currentStep === 4) {
-      // Open WhatsApp with booking details
+    } else if (currentStep === maxSteps) {
       handleBookNow();
     }
   };
@@ -33,22 +33,28 @@ const Booking = () => {
   };
 
   const handleBookNow = () => {
-    const message = encodeURIComponent(
-      `Hello! I'd like to book a car wash service with the following details:
+    let message = `Hello! I'd like to book a car wash service with the following details:
 
 Car Type: ${selectedCar}
-Service Type: ${selectedServiceType}
-${selectedServiceType === 'monthly' ? `Plan: ${selectedPlan}` : `Additional Services: ${selectedServices.join(', ')}`}
+Service Type: ${selectedServiceType}`;
 
-Please confirm the booking details and let me know the next steps.`
-    );
+    if (selectedPlan) {
+      message += `\nWashing Plan: ${selectedPlan}`;
+    }
+
+    if (selectedServiceType === 'one-time' && selectedServices.length > 0) {
+      message += `\nAdditional Services: ${selectedServices.join(', ')}`;
+    }
+
+    message += `\n\nPlease confirm the booking details and let me know the next steps.`;
     
-    const whatsappUrl = `https://wa.me/+1234567890?text=${message}`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/+1234567890?text=${encodedMessage}`;
     window.open(whatsappUrl, '_blank');
   };
 
   const getMaxSteps = () => {
-    return selectedServiceType === 'monthly' ? 4 : 4;
+    return selectedServiceType === 'one-time' ? 5 : 4;
   };
 
   return (
@@ -56,10 +62,10 @@ Please confirm the booking details and let me know the next steps.`
       {/* HERO SECTION WITH INTEGRATED BOOKING */}
       <section className="relative text-white w-full min-h-screen">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-80"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60"
           style={{ backgroundImage: "url('/MainViewWashing.png')" }}
         />
-        <div className="absolute inset-0 bg-black/80" />
+        <div className="absolute inset-0 bg-black/90" />
 
         <div className="relative z-10 pt-8 md:pt-16 pb-12 md:pb-20 px-4 md:px-6">
           <div className="max-w-7xl mx-auto">
@@ -93,19 +99,19 @@ Please confirm the booking details and let me know the next steps.`
                     onServiceTypeSelect={setSelectedServiceType}
                   />
                 )}
-                {currentStep === 3 && selectedServiceType === 'monthly' && (
+                {currentStep === 3 && (
                   <PricingPlans 
                     selectedPlan={selectedPlan}
                     onPlanSelect={setSelectedPlan}
                   />
                 )}
-                {currentStep === 3 && selectedServiceType === 'one-time' && (
+                {currentStep === 4 && selectedServiceType === 'one-time' && (
                   <ServiceSelection 
                     selectedServices={selectedServices}
                     onServicesChange={setSelectedServices}
                   />
                 )}
-                {currentStep === 4 && (
+                {(currentStep === 4 && selectedServiceType === 'monthly') || (currentStep === 5 && selectedServiceType === 'one-time') ? (
                   <div className="text-center">
                     <h3 className="text-2xl font-bold text-white mb-4">Ready to Book!</h3>
                     <div className="bg-gray-800 p-6 rounded-lg mb-6">
@@ -113,16 +119,16 @@ Please confirm the booking details and let me know the next steps.`
                       <div className="space-y-2 text-left">
                         <p><span className="text-gray-400">Car Type:</span> {selectedCar}</p>
                         <p><span className="text-gray-400">Service Type:</span> {selectedServiceType}</p>
-                        {selectedServiceType === 'monthly' && (
-                          <p><span className="text-gray-400">Plan:</span> {selectedPlan}</p>
+                        {selectedPlan && (
+                          <p><span className="text-gray-400">Washing Plan:</span> {selectedPlan}</p>
                         )}
                         {selectedServiceType === 'one-time' && selectedServices.length > 0 && (
-                          <p><span className="text-gray-400">Services:</span> {selectedServices.join(', ')}</p>
+                          <p><span className="text-gray-400">Additional Services:</span> {selectedServices.join(', ')}</p>
                         )}
                       </div>
                     </div>
                   </div>
-                )}
+                ) : null}
               </div>
 
               {/* Navigation Buttons */}
@@ -141,7 +147,7 @@ Please confirm the booking details and let me know the next steps.`
                   className="bg-green-400 hover:bg-green-500 text-black w-full sm:w-auto"
                   onClick={handleNextStep}
                 >
-                  {currentStep === 4 ? 'Book Now' : 'Next'}
+                  {(currentStep === 4 && selectedServiceType === 'monthly') || (currentStep === 5 && selectedServiceType === 'one-time') ? 'Book Now' : 'Next'}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>

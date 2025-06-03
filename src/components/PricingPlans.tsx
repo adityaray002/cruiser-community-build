@@ -47,7 +47,7 @@ const PricingPlans = ({ selectedPlan, onPlanSelect }: PricingPlansProps) => {
       highlighted: true
     },
     {
-      name: "Marketing License",
+      name: "Premium License",
       price: 130,
       currency: "INR",
       features: [
@@ -68,7 +68,9 @@ const PricingPlans = ({ selectedPlan, onPlanSelect }: PricingPlansProps) => {
           <Card 
             key={index} 
             className={`cursor-pointer transition-all ${
-              plan.highlighted 
+              selectedPlan === plan.name
+                ? 'bg-gray-700 border-green-400' 
+                : plan.highlighted 
                 ? 'bg-gray-700 border-green-400' 
                 : 'bg-gray-800 border-gray-600 hover:border-gray-500'
             }`}
@@ -96,12 +98,12 @@ const PricingPlans = ({ selectedPlan, onPlanSelect }: PricingPlansProps) => {
               
               <Button 
                 className={`w-full ${
-                  plan.highlighted 
+                  selectedPlan === plan.name
                     ? 'bg-green-400 hover:bg-green-500 text-black' 
                     : 'bg-gray-600 hover:bg-gray-500 text-white'
                 }`}
               >
-                Select Plan
+                {selectedPlan === plan.name ? 'Selected' : 'Select Plan'}
               </Button>
             </CardContent>
           </Card>
@@ -119,7 +121,9 @@ const PricingPlans = ({ selectedPlan, onPlanSelect }: PricingPlansProps) => {
             <Card 
               key={index} 
               className={`cursor-pointer transition-all ${
-                plan.highlighted 
+                selectedPlan === plan.name
+                  ? 'bg-gray-700 border-green-400' 
+                  : plan.highlighted 
                   ? 'bg-gray-700 border-green-400' 
                   : 'bg-gray-800 border-gray-600 hover:border-gray-500'
               }`}
@@ -147,12 +151,12 @@ const PricingPlans = ({ selectedPlan, onPlanSelect }: PricingPlansProps) => {
                 
                 <Button 
                   className={`w-full ${
-                    plan.highlighted 
+                    selectedPlan === plan.name
                       ? 'bg-green-400 hover:bg-green-500 text-black' 
                       : 'bg-gray-600 hover:bg-gray-500 text-white'
                   }`}
                 >
-                  Select Plan
+                  {selectedPlan === plan.name ? 'Selected' : 'Select Plan'}
                 </Button>
               </CardContent>
             </Card>
