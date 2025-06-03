@@ -14,9 +14,10 @@ const Header = ({ onCartOpen }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 p-4 md:p-6">
-      <div className="flex items-center justify-between">
+    <header className="absolute top-0 left-0 right-0 z-50 p-4 md:p-6 ">
+      <div className="flex items-center justify-between ">
         {/* Logo */}
+        
         <div className="text-xl md:text-2xl font-bold text-white italic">
           Car Wash
         </div>
@@ -27,7 +28,7 @@ const Header = ({ onCartOpen }: HeaderProps) => {
           <a href="#booking" onClick={() => navigate('/booking')} className="text-white hover:text-green-400 transition-colors cursor-pointer text-sm xl:text-base">BOOKING</a>
           <a href="#about" className="text-white hover:text-green-400 transition-colors text-sm xl:text-base">ABOUT US</a>
           <a href="#contact" className="text-white hover:text-green-400 transition-colors text-sm xl:text-base">CONTACT</a>
-          <a href="#rental" className="text-white hover:text-green-400 transition-colors text-sm xl:text-base">CAR RENTAL</a>
+          {/* <a href="#rental" className="text-white hover:text-green-400 transition-colors text-sm xl:text-base">CAR RENTAL</a> */}
         </nav>
         
         {/* Right Side - Desktop */}
@@ -119,13 +120,7 @@ const Header = ({ onCartOpen }: HeaderProps) => {
             >
               CONTACT
             </a>
-            <a 
-              href="#rental" 
-              className="text-white hover:text-green-400 transition-colors py-2"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              CAR RENTAL
-            </a>
+           
             <div className="border-t border-gray-700 pt-4 space-y-2">
               {isLoggedIn ? (
                 <span className="text-white block">HELLO <span className="text-green-400">RAHUL</span></span>

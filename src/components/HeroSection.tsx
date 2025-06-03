@@ -13,7 +13,7 @@ const HeroSection = ({ currentSlide, totalSlides, onSlideChange }: HeroSectionPr
   const navigate = useNavigate();
   
   return (
-    <section className="pt-24 md:pt-32 pb-12 md:pb-20 px-4 md:px-6">
+    <section className="pt-24 md:pt-32 pb-12 md:pb-20 px-4 md:px-6 inset-0 bg-black/50 z-0">
       <div className="max-w-7xl mx-auto">
         <div className="max-w-full lg:max-w-2xl">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 md:mb-6">
@@ -38,7 +38,7 @@ const HeroSection = ({ currentSlide, totalSlides, onSlideChange }: HeroSectionPr
         </div>
         
         {/* Slide Navigation */}
-        <div className="flex items-center justify-center mt-12 md:mt-20 space-x-3 md:space-x-4">
+        {/* <div className="flex items-center justify-center mt-12 md:mt-20 space-x-3 md:space-x-4">
           <Button 
             variant="ghost" 
             size="icon"
@@ -67,7 +67,7 @@ const HeroSection = ({ currentSlide, totalSlides, onSlideChange }: HeroSectionPr
           >
             <ArrowRight className="h-4 w-4 md:h-6 md:w-6" />
           </Button>
-        </div>
+        </div> */}
       </div>
     </section>
   );
