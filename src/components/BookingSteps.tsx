@@ -16,12 +16,14 @@ const BookingSteps = ({ currentStep, selectedServiceType }: BookingStepsProps) =
       return [
         ...baseSteps,
         { number: 4, title: "Additional Services", subtitle: "Add-ons" },
-        { number: 5, title: "Book Now", subtitle: "Confirm" }
+        { number: 5, title: "Your Details", subtitle: "Name" },
+        { number: 6, title: "Book Now", subtitle: "Confirm" }
       ];
     } else {
       return [
         ...baseSteps,
-        { number: 4, title: "Book Now", subtitle: "Confirm" }
+        { number: 4, title: "Your Details", subtitle: "Name" },
+        { number: 5, title: "Book Now", subtitle: "Confirm" }
       ];
     }
   };
