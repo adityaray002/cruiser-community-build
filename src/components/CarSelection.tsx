@@ -8,12 +8,12 @@ interface CarSelectionProps {
 }
 
 const CarSelection = ({ selectedCar, onCarSelect }: CarSelectionProps) => {
-  const carTypes = ["Sedan", "SUV", "Pick Up", "Mini Bus"];
+  const carTypes = ["Sedan", "SUV", "Hatchback", "Luxury"];
   const carImages: Record<string, string> = {
     Sedan: "/sedan.png",
     SUV: "/suv.png",
-    "Pick Up": "/pickup.png",
-    "Mini Bus": "/minibus.png",
+    "Hatchback": "/hatchback.png",
+    "Luxury": "/rangerover.png",
   };
 
   const [currentIndex, setCurrentIndex] = useState(carTypes.indexOf(selectedCar));
