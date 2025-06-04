@@ -41,9 +41,9 @@ const Index = () => {
         
         <main>
           <HeroSection 
-            currentSlide={currentSlide}
-            totalSlides={totalSlides}
-            onSlideChange={setCurrentSlide}
+            // currentSlide={currentSlide}
+            // totalSlides={totalSlides}
+            // onSlideChange={setCurrentSlide}
           />
           <ServicesSection />
           <AboutSection />
