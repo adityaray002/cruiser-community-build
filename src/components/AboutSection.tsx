@@ -91,7 +91,7 @@ const AboutSection = () => {
              w-[70%] sm:w-[60%] md:w-[50%] lg:w-[40%] xl:w-[65%] 
              bg-gradient-to-br from-gray-800 to-gray-900"
               style={{
-                backgroundImage: "url('/professional washing.png')",
+                backgroundImage: "url('/professional-washing.png')",
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
               }}
