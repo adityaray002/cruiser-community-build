@@ -24,7 +24,7 @@ const TestimonialsSection = () => {
   ];
   
   return (
-    <section className="py-12 md:py-20 px-4 md:px-6 bg-gray-900/50">
+    <section className="py-12 md:py-20 px-4 md:px-6 bg-gray-900/50" style={{ backgroundColor: "#0b0f10" }}>
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">What our clients say</h2>
