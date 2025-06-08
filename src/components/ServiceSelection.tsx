@@ -30,7 +30,11 @@ const ServiceSelection = ({ selectedServices, onServicesChange }: ServiceSelecti
 
   return (
     <div>
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      <div className="text-center mb-6">
+        <h2 className="text-xl md:text-3xl font-bold text-white mb-2">Additional Services</h2>
+      </div>
+      
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6">
         {services.map((service) => (
           <Card
             key={service.id}
@@ -63,6 +67,12 @@ const ServiceSelection = ({ selectedServices, onServicesChange }: ServiceSelecti
             </CardContent>
           </Card>
         ))}
+      </div>
+
+      <div className="text-center">
+        <p className="text-green-400 font-semibold text-sm md:text-base">
+          Optional - You can skip this step if you don't need additional services
+        </p>
       </div>
     </div>
   );

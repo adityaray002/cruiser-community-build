@@ -70,8 +70,8 @@ const Booking = () => {
         default:
           return false;
       }
-    } else if (selectedServiceType === "monthly") {
-      // monthly
+    } else if (selectedServiceType === "monthly" || selectedServiceType === "daily-car-wash") {
+      // monthly or daily-car-wash
       switch (currentStep) {
         case 1:
           return selectedServiceType !== "";
@@ -137,6 +137,13 @@ const Booking = () => {
     return visibleSteps;
   };
 
+  // Auto scroll when step changes
+  useEffect(() => {
+    if (stepContentRef.current) {
+      stepContentRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [currentStep]);
+
   return (
     <div className="bg-black text-white min-h-screen">
       <Header showNav={false} onCartOpen={() => {}} />
@@ -198,7 +205,7 @@ const Booking = () => {
                       {isCompleted ? "✓" : stepNum}
                     </div>
                     <div className="flex-1">
-                      <div className={`text-xs mb-1 ${isActive ? 'text-black font-bold' : 'text-gray-400'}`}>
+                      <div className={`text-xs mb-1 font-bold ${isActive ? 'text-black' : 'text-gray-400'}`}>
                         STEP {stepNum}
                       </div>
                       <span className="text-sm font-semibold">{title}</span>
@@ -260,7 +267,7 @@ const Booking = () => {
                       </div>
                       <span className="text-sm font-semibold">{title}</span>
                     </div>
-                    <p className={`text-xs ml-9 ${isActive ? 'text-black font-bold' : ''}`}>
+                    <p className={`text-xs ml-9 font-bold ${isActive ? 'text-black' : 'text-gray-400'}`}>
                       {title === "Service Type" && "Choose type"}
                       {title === "Select Car" && "Select vehicle"}
                       {title === "Washing Plan" && "Pick plan"}
@@ -274,8 +281,8 @@ const Booking = () => {
             </div>
           )}
 
-          {/* Current Selection Summary - Only show on final step */}
-          {currentStep === totalSteps && (
+          {/* Current Selection Summary - Always visible except on final step */}
+          {currentStep !== totalSteps && (selectedServiceType || selectedCar || selectedPlan || selectedServices.length > 0 || customerName) && (
             <div className="mb-6">
               <BookingSummary
                 selectedServiceType={selectedServiceType}
@@ -320,33 +327,24 @@ const Booking = () => {
                     />
                   )}
                   {currentStep === 4 && (
-                    <div>
-                      <div className="text-center mb-6">
-                        <h2 className="text-xl md:text-3xl font-bold text-white mb-2">Additional Services</h2>
-                        <p className="text-green-400 font-semibold">Optional - You can skip this step if you don't need additional services</p>
-                      </div>
-                      <ServiceSelection
-                        selectedServices={selectedServices}
-                        onServicesChange={setSelectedServices}
-                      />
-                    </div>
+                    <ServiceSelection
+                      selectedServices={selectedServices}
+                      onServicesChange={setSelectedServices}
+                    />
                   )}
                   {currentStep === 5 && (
                     <CustomerDetails customerName={customerName} onNameChange={setCustomerName} />
                   )}
                   {currentStep === 6 && (
-                    <div className="bg-gray-900 p-6 rounded-lg text-gray-300">
-                      <h2 className="text-2xl font-semibold mb-4 text-green-400">Booking Summary</h2>
-                      <ul className="list-disc list-inside space-y-2">
-                        <li><strong>Service Type:</strong> {selectedServiceType || "-"}</li>
-                        <li><strong>Car Type:</strong> {selectedCar || "-"}</li>
-                        <li><strong>Washing Plan:</strong> {selectedPlan || "-"}</li>
-                        <li><strong>Additional Services:</strong> {selectedServices.length > 0 ? selectedServices.join(", ") : "None"}</li>
-                        <li><strong>Customer Name:</strong> {customerName || "-"}</li>
-                      </ul>
-                      <p className="mt-4 text-green-400 font-semibold">
-                        Please review your selections and click "Book Now" to confirm.
-                      </p>
+                    <div className="mb-6">
+                      <BookingSummary
+                        selectedServiceType={selectedServiceType}
+                        selectedCar={selectedCar}
+                        selectedPlan={selectedPlan}
+                        selectedServices={selectedServices}
+                        customerName={customerName}
+                        onEditStep={handleStepClick}
+                      />
                     </div>
                   )}
                 </>
@@ -369,16 +367,15 @@ const Booking = () => {
                     <CustomerDetails customerName={customerName} onNameChange={setCustomerName} />
                   )}
                   {currentStep === 4 && (
-                    <div className="bg-gray-900 p-6 rounded-lg text-gray-300">
-                      <h2 className="text-2xl font-semibold mb-4 text-green-400">Booking Summary</h2>
-                      <ul className="list-disc list-inside space-y-2">
-                        <li><strong>Service Type:</strong> {selectedServiceType || "-"}</li>
-                        <li><strong>Washing Plan:</strong> {selectedPlan || "-"}</li>
-                        <li><strong>Customer Name:</strong> {customerName || "-"}</li>
-                      </ul>
-                      <p className="mt-4 text-green-400 font-semibold">
-                        Please review your selections and click "Book Now" to confirm.
-                      </p>
+                    <div className="mb-6">
+                      <BookingSummary
+                        selectedServiceType={selectedServiceType}
+                        selectedCar={selectedCar}
+                        selectedPlan={selectedPlan}
+                        selectedServices={selectedServices}
+                        customerName={customerName}
+                        onEditStep={handleStepClick}
+                      />
                     </div>
                   )}
                 </>
@@ -390,7 +387,7 @@ const Booking = () => {
           <div className="flex flex-col sm:flex-row justify-between gap-4 mt-6 md:mt-8">
             <Button
               variant="outline"
-              className="border-green-400 text-green-400 hover:bg-green-400 hover:text-black bg-transparent w-full sm:w-auto"
+              className="border-green-400 text-green-400 hover:bg-green-400 hover:text-black bg-gray-800 w-full sm:w-auto"
               onClick={handlePrevStep}
               disabled={currentStep === 1}
             >
@@ -415,7 +412,7 @@ const Booking = () => {
                 onClick={handleNextStep}
                 disabled={!validateCurrentStep()}
               >
-                {currentStep === 4 && selectedServiceType === "one-time" ? "Skip / Next" : "Next"}
+                Next
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             )}
