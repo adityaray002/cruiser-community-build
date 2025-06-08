@@ -12,10 +12,12 @@ import PricingPlans from "@/components/PricingPlans";
 import OneTimePricingPlans from "@/components/OneTimePricingPlans";
 import CustomerDetails from "@/components/CustomerDetails";
 import ServiceSelection from "@/components/ServiceSelection";
+import BookingSummary from "@/components/BookingSummary";
 
 const Booking = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
+  const [maxCompletedStep, setMaxCompletedStep] = useState(1);
   const stepContentRef = useRef<HTMLDivElement>(null);
 
   const [selectedServiceType, setSelectedServiceType] = useState(""); // "one-time" or "monthly"
@@ -87,7 +89,9 @@ const Booking = () => {
 
   const handleNextStep = () => {
     if (!validateCurrentStep()) return;
-    setCurrentStep((prev) => Math.min(prev + 1, totalSteps));
+    const nextStep = Math.min(currentStep + 1, totalSteps);
+    setCurrentStep(nextStep);
+    setMaxCompletedStep(Math.max(maxCompletedStep, nextStep));
   };
 
   const handlePrevStep = () => {
@@ -95,12 +99,14 @@ const Booking = () => {
   };
 
   const handleStepClick = (step: number) => {
-    setCurrentStep(step);
-    setTimeout(() => {
-      if (stepContentRef.current) {
-        stepContentRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }, 100);
+    if (step <= maxCompletedStep) {
+      setCurrentStep(step);
+      setTimeout(() => {
+        if (stepContentRef.current) {
+          stepContentRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 100);
+    }
   };
 
   const handleBookNow = () => {
@@ -120,6 +126,16 @@ const Booking = () => {
     window.open(whatsappUrl, "_blank");
   };
 
+  const getVisibleSteps = () => {
+    if (!isMobile) return steps;
+    
+    const visibleSteps = [];
+    for (let i = 0; i < Math.min(maxCompletedStep + 1, steps.length); i++) {
+      visibleSteps.push(steps[i]);
+    }
+    return visibleSteps;
+  };
+
   return (
     <div className="bg-black text-white min-h-screen">
       <Header showNav={false} onCartOpen={() => {}} />
@@ -132,66 +148,139 @@ const Booking = () => {
         <div className="absolute inset-0 bg-black/90" />
 
         <div className="relative z-10 pt-8 md:pt-16 pb-12 md:pb-20 px-4 md:px-6 max-w-7xl mx-auto">
-<div className="max-w-full lg:max-w-2xl mb-8 md:mb-12 mt-12">
-  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 md:mb-6">
-   
-    Doorstep Car Wash
-    <br />
-    <span className="text-green-400">Anywhere. Anytime.</span>
-  </h1>
-  
-</div>
+          <div className="max-w-full lg:max-w-2xl mb-8 md:mb-12 mt-12">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 md:mb-6">
+              Doorstep Car Wash
+              <br />
+              <span className="text-green-400">Anywhere. Anytime.</span>
+            </h1>
+          </div>
 
+          {/* Mobile Steps - Vertical */}
+          {isMobile && (
+            <div className="mb-6 space-y-3">
+              {getVisibleSteps().map((title, idx) => {
+                const stepNum = idx + 1;
+                const isActive = currentStep === stepNum;
+                const isCompleted = maxCompletedStep > stepNum;
 
-
-          {/* Step Cards */}
-          <div className="mb-6 flex flex-wrap gap-4 justify-start">
-            {steps.map((title, idx) => {
-              const stepNum = idx + 1;
-              const isActive = currentStep === stepNum;
-              const isCompleted = currentStep > stepNum;
-
-              return (
-                <motion.button
-                  key={stepNum}
-                  onClick={() => handleStepClick(stepNum)}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`flex-1 min-w-[150px] p-4 text-left rounded-xl border transition-all shadow-md
-                    ${
-                      isActive
-                        ? "border-green-500 bg-green-500 text-black font-semibold shadow-lg"
-                        : isCompleted
-                        ? "border-green-600 bg-green-700 text-white"
-                        : "border-gray-700 bg-gray-900 text-gray-500"
-                    }`}
-                >
-                  <div className="flex items-center gap-3 mb-1">
+                return (
+                  <motion.button
+                    key={stepNum}
+                    onClick={() => handleStepClick(stepNum)}
+                    disabled={stepNum > maxCompletedStep}
+                    whileHover={{ scale: stepNum <= maxCompletedStep ? 1.02 : 1 }}
+                    whileTap={{ scale: stepNum <= maxCompletedStep ? 0.98 : 1 }}
+                    className={`w-full p-4 text-left rounded-xl border transition-all shadow-md flex items-center gap-3
+                      ${
+                        isActive
+                          ? "border-green-500 bg-green-500 text-black font-semibold shadow-lg"
+                          : isCompleted
+                          ? "border-green-600 bg-green-700 text-white cursor-pointer"
+                          : stepNum <= maxCompletedStep
+                          ? "border-gray-700 bg-gray-900 text-gray-300 cursor-pointer"
+                          : "border-gray-800 bg-gray-900/50 text-gray-600 cursor-not-allowed"
+                      }`}
+                  >
                     <div
-                      className={`w-6 h-6 flex items-center justify-center rounded-full font-bold text-xs border-2
+                      className={`w-8 h-8 flex items-center justify-center rounded-full font-bold text-sm border-2
                         ${
                           isActive
                             ? "bg-yellow-400 text-black border-yellow-400"
                             : isCompleted
                             ? "bg-teal-500 text-white border-teal-500"
-                            : "bg-gray-700 text-white border-gray-700"
+                            : stepNum <= maxCompletedStep
+                            ? "bg-gray-700 text-white border-gray-700"
+                            : "bg-gray-800 text-gray-600 border-gray-800"
                         }`}
                     >
                       {isCompleted ? "✓" : stepNum}
                     </div>
-                    <span className="text-sm font-semibold">{title}</span>
-                  </div>
-                  <p className="text-xs ml-9">
-                    {title === "Service Type" && "Choose type"}
-                    {title === "Select Car" && "Select vehicle"}
-                    {title === "Washing Plan" && "Pick plan"}
-                    {title === "Additional Services" && "Optional extras"}
-                    {title === "Customer Details" && "Your info"}
-                    {title === "Summary" && "Review & confirm"}
-                  </p>
-                </motion.button>
-              );
-            })}
+                    <div className="flex-1">
+                      <div className="text-xs text-gray-400 mb-1">STEP {stepNum}</div>
+                      <span className="text-sm font-semibold">{title}</span>
+                      <p className="text-xs mt-1">
+                        {title === "Service Type" && "Choose service type"}
+                        {title === "Select Car" && "Select your vehicle"}
+                        {title === "Washing Plan" && "Pick washing plan"}
+                        {title === "Additional Services" && "Optional extras"}
+                        {title === "Customer Details" && "Enter your info"}
+                        {title === "Summary" && "Review & confirm"}
+                      </p>
+                    </div>
+                  </motion.button>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Desktop Steps - Horizontal */}
+          {!isMobile && (
+            <div className="mb-6 flex flex-wrap gap-4 justify-start">
+              {steps.map((title, idx) => {
+                const stepNum = idx + 1;
+                const isActive = currentStep === stepNum;
+                const isCompleted = maxCompletedStep > stepNum;
+
+                return (
+                  <motion.button
+                    key={stepNum}
+                    onClick={() => handleStepClick(stepNum)}
+                    disabled={stepNum > maxCompletedStep}
+                    whileHover={{ scale: stepNum <= maxCompletedStep ? 1.02 : 1 }}
+                    whileTap={{ scale: stepNum <= maxCompletedStep ? 0.98 : 1 }}
+                    className={`flex-1 min-w-[150px] p-4 text-left rounded-xl border transition-all shadow-md
+                      ${
+                        isActive
+                          ? "border-green-500 bg-green-500 text-black font-semibold shadow-lg"
+                          : isCompleted
+                          ? "border-green-600 bg-green-700 text-white cursor-pointer"
+                          : stepNum <= maxCompletedStep
+                          ? "border-gray-700 bg-gray-900 text-gray-300 cursor-pointer"
+                          : "border-gray-800 bg-gray-900/50 text-gray-600 cursor-not-allowed"
+                      }`}
+                  >
+                    <div className="flex items-center gap-3 mb-1">
+                      <div
+                        className={`w-6 h-6 flex items-center justify-center rounded-full font-bold text-xs border-2
+                          ${
+                            isActive
+                              ? "bg-yellow-400 text-black border-yellow-400"
+                              : isCompleted
+                              ? "bg-teal-500 text-white border-teal-500"
+                              : stepNum <= maxCompletedStep
+                              ? "bg-gray-700 text-white border-gray-700"
+                              : "bg-gray-800 text-gray-600 border-gray-800"
+                          }`}
+                      >
+                        {isCompleted ? "✓" : stepNum}
+                      </div>
+                      <span className="text-sm font-semibold">{title}</span>
+                    </div>
+                    <p className="text-xs ml-9">
+                      {title === "Service Type" && "Choose type"}
+                      {title === "Select Car" && "Select vehicle"}
+                      {title === "Washing Plan" && "Pick plan"}
+                      {title === "Additional Services" && "Optional extras"}
+                      {title === "Customer Details" && "Your info"}
+                      {title === "Summary" && "Review & confirm"}
+                    </p>
+                  </motion.button>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Current Selection Summary */}
+          <div className="mb-6">
+            <BookingSummary
+              selectedServiceType={selectedServiceType}
+              selectedCar={selectedCar}
+              selectedPlan={selectedPlan}
+              selectedServices={selectedServices}
+              customerName={customerName}
+              onEditStep={handleStepClick}
+            />
           </div>
 
           {/* Step content */}
@@ -211,7 +300,7 @@ const Booking = () => {
                       selectedServiceType={selectedServiceType}
                       onServiceTypeSelect={(val) => {
                         setSelectedServiceType(val);
-                        setCurrentStep(1);
+                        setMaxCompletedStep(1);
                       }}
                     />
                   )}
@@ -226,10 +315,16 @@ const Booking = () => {
                     />
                   )}
                   {currentStep === 4 && (
-                    <ServiceSelection
-                      selectedServices={selectedServices}
-                      onServicesChange={setSelectedServices}
-                    />
+                    <div>
+                      <div className="text-center mb-6">
+                        <h2 className="text-xl md:text-3xl font-bold text-white mb-2">Additional Services</h2>
+                        <p className="text-green-400 font-semibold">Optional - You can skip this step if you don't need additional services</p>
+                      </div>
+                      <ServiceSelection
+                        selectedServices={selectedServices}
+                        onServicesChange={setSelectedServices}
+                      />
+                    </div>
                   )}
                   {currentStep === 5 && (
                     <CustomerDetails customerName={customerName} onNameChange={setCustomerName} />
@@ -245,7 +340,7 @@ const Booking = () => {
                         <li><strong>Customer Name:</strong> {customerName || "-"}</li>
                       </ul>
                       <p className="mt-4 text-green-400 font-semibold">
-                        Please review your selections and click “Book Now” to confirm.
+                        Please review your selections and click "Book Now" to confirm.
                       </p>
                     </div>
                   )}
@@ -258,7 +353,7 @@ const Booking = () => {
                       selectedServiceType={selectedServiceType}
                       onServiceTypeSelect={(val) => {
                         setSelectedServiceType(val);
-                        setCurrentStep(1); // reset step on service type change
+                        setMaxCompletedStep(1);
                       }}
                     />
                   )}
@@ -277,7 +372,7 @@ const Booking = () => {
                         <li><strong>Customer Name:</strong> {customerName || "-"}</li>
                       </ul>
                       <p className="mt-4 text-green-400 font-semibold">
-                        Please review your selections and click “Book Now” to confirm.
+                        Please review your selections and click "Book Now" to confirm.
                       </p>
                     </div>
                   )}
@@ -290,7 +385,7 @@ const Booking = () => {
           <div className="flex flex-col sm:flex-row justify-between gap-4 mt-6 md:mt-8">
             <Button
               variant="outline"
-              className="border-green-400 text-green-400 hover:bg-green-400 hover:text-black w-full sm:w-auto"
+              className="border-green-400 text-green-400 hover:bg-green-400 hover:text-black bg-gray-800 w-full sm:w-auto"
               onClick={handlePrevStep}
               disabled={currentStep === 1}
             >
@@ -315,7 +410,7 @@ const Booking = () => {
                 onClick={handleNextStep}
                 disabled={!validateCurrentStep()}
               >
-                Next
+                {currentStep === 4 && selectedServiceType === "one-time" ? "Skip / Next" : "Next"}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             )}

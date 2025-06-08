@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -84,7 +83,7 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
               }`}
               onClick={() => onPlanSelect(plan.name)}
             >
-              <CardContent className="p-3">
+              <CardContent className="p-3 flex flex-col h-full">
                 <div className="text-center mb-3">
                   <span className="text-sm font-bold text-white">{plan.currency}</span>
                   <span className="text-xl font-bold text-white">{plan.price}</span>
@@ -95,7 +94,7 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
                   {plan.name}
                 </h3>
                 
-                <div className="space-y-1 mb-3">
+                <div className="space-y-1 mb-3 flex-grow">
                   {plan.features.map((feature, i) => (
                     <div key={i} className="flex items-center text-xs text-gray-300">
                       <span className="text-green-400 mr-1 text-xs">✓</span>
@@ -111,7 +110,7 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
                 )}
                 
                 <Button 
-                  className={`w-full text-xs py-1 h-8 ${
+                  className={`w-full text-xs py-1 h-8 mt-auto ${
                     selectedPlan === plan.name
                       ? 'bg-green-400 hover:bg-green-500 text-black' 
                       : 'bg-gray-600 hover:bg-gray-500 text-white'
@@ -144,7 +143,7 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
               }`}
               onClick={() => onPlanSelect(plan.name)}
             >
-              <CardContent className="p-4 lg:p-6">
+              <CardContent className="p-4 lg:p-6 flex flex-col h-full">
                 <div className="text-center mb-4">
                   <span className="text-xl lg:text-2xl font-bold text-white">{plan.currency}</span>
                   <span className="text-3xl lg:text-4xl font-bold text-white">{plan.price}</span>
@@ -155,7 +154,7 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
                   {plan.name}
                 </h3>
                 
-                <div className="space-y-2 mb-4">
+                <div className="space-y-2 mb-4 flex-grow">
                   {plan.features.map((feature, i) => (
                     <div key={i} className="flex items-center text-xs lg:text-sm text-gray-300">
                       <span className="text-green-400 mr-2">✓</span>
@@ -171,7 +170,7 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
                 )}
                 
                 <Button 
-                  className={`w-full ${
+                  className={`w-full mt-auto ${
                     selectedPlan === plan.name
                       ? 'bg-green-400 hover:bg-green-500 text-black' 
                       : 'bg-gray-600 hover:bg-gray-500 text-white'
