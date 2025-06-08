@@ -107,21 +107,28 @@ const HeroSection = () => {
             We deliver expert car detailing services at your location — fast, eco-friendly, and convenient.
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-          >
-            <Button
-    size="lg"
-    className="bg-green-400 hover:bg-green-500 text-black font-semibold 
-               px-6 py-3 text-base md:text-lg 
-               max-w-xs mx-auto sm:max-w-none sm:mx-0 sm:w-auto"
-    onClick={() => navigate("/booking")}
+         <motion.button
+  whileHover={{ scale: 1.05 }}
+  animate={{
+    scale: [1, 1.03, 1],
+    transition: { duration: 1.8, repeat: Infinity, repeatType: "loop" },
+  }}
+  onClick={() => navigate("/booking")}
+  className="group flex items-center justify-center gap-2 bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-black font-extrabold tracking-wide uppercase px-8 py-4 text-lg rounded-full shadow-xl transition-all duration-300"
+>
+  <span className="drop-shadow-lg">Book Now</span>
+  <svg
+    className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
   >
-              BOOK NOW
-            </Button>
-          </motion.div>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"></path>
+  </svg>
+</motion.button>
+
         </div>
 
         {/* Image Section with glowing background & animation */}

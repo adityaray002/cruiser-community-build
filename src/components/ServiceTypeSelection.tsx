@@ -11,7 +11,7 @@ const ServiceTypeSelection = ({ selectedServiceType, onServiceTypeSelect }: Serv
   const serviceTypes = [
     {
       type: "monthly",
-      title: "Monthly Service",
+      title: "Daily Car wash",
       description: "Regular monthly car washing with subscription plans",
       icon: "📅"
     },

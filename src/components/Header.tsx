@@ -5,10 +5,11 @@ import { ShoppingCart, User, Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
-  onCartOpen: () => void;
+  showNav?: boolean;
+  onCartOpen?: () => void;
 }
 
-const Header = ({ onCartOpen }: HeaderProps) => {
+const Header =  ({ showNav = true, onCartOpen }: HeaderProps) => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -23,6 +24,7 @@ const Header = ({ onCartOpen }: HeaderProps) => {
         </div>
         
         {/* Desktop Navigation */}
+        {showNav && (
         <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
           <a href="#home" className="text-white hover:text-green-400 transition-colors text-sm xl:text-base">HOME</a>
           <a href="#booking" onClick={() => navigate('/booking')} className="text-white hover:text-green-400 transition-colors cursor-pointer text-sm xl:text-base">BOOKING</a>
@@ -30,10 +32,10 @@ const Header = ({ onCartOpen }: HeaderProps) => {
           <a href="#contact" className="text-white hover:text-green-400 transition-colors text-sm xl:text-base">CONTACT</a>
           {/* <a href="#rental" className="text-white hover:text-green-400 transition-colors text-sm xl:text-base">CAR RENTAL</a> */}
         </nav>
-        
+        )}
         {/* Right Side - Desktop */}
         <div className="hidden md:flex items-center space-x-2 lg:space-x-4">
-          {isLoggedIn ? (
+          {/* {isLoggedIn ? (
             <span className="text-white text-sm lg:text-base">HELLO <span className="text-green-400">RAHUL</span></span>
           ) : (
             <Button 
@@ -43,37 +45,37 @@ const Header = ({ onCartOpen }: HeaderProps) => {
             >
               SIGN IN
             </Button>
-          )}
+          )} */}
           
-          <Button 
+          {/* <Button 
             variant="ghost" 
             size="icon"
             className="text-white hover:text-green-400 h-8 w-8 lg:h-10 lg:w-10"
             onClick={() => navigate('/auth')}
           >
             <User className="h-4 w-4 lg:h-5 lg:w-5" />
-          </Button>
+          </Button> */}
           
-          <Button 
+          {/* <Button 
             variant="ghost" 
             size="icon"
             className="text-green-400 hover:text-green-300 h-8 w-8 lg:h-10 lg:w-10"
             onClick={onCartOpen}
           >
             <ShoppingCart className="h-4 w-4 lg:h-5 lg:w-5" />
-          </Button>
+          </Button> */}
         </div>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center space-x-2">
-          <Button 
+          {/* <Button 
             variant="ghost" 
             size="icon"
             className="text-green-400 hover:text-green-300 h-8 w-8"
             onClick={onCartOpen}
           >
             <ShoppingCart className="h-4 w-4" />
-          </Button>
+          </Button> */}
           <Button 
             variant="ghost" 
             size="icon"
@@ -86,7 +88,7 @@ const Header = ({ onCartOpen }: HeaderProps) => {
       </div>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && (
+      {isMobileMenuOpen && showNav &&(
         <div className="md:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-sm border-t border-gray-700">
           <nav className="flex flex-col p-4 space-y-4">
             <a 

@@ -55,7 +55,7 @@ import { useNavigate } from "react-router-dom";
 const AboutSection = () => {
   const navigate = useNavigate();
   return (
-    <section
+    <section id="about" 
       className="py-8 md:py-20 px-4 md:px-6"
       style={{ backgroundColor: "#0b0f10" }}
     >
