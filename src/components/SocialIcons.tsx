@@ -1,4 +1,6 @@
 
+import { Facebook, Instagram } from "lucide-react";
+
 const SocialIcons = () => {
   return (
     <div className="fixed right-4 md:right-6 top-1/2 transform -translate-y-1/2 z-40">
@@ -7,25 +9,13 @@ const SocialIcons = () => {
           href="#" 
           className="w-10 h-10 md:w-12 md:h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:text-green-400 hover:bg-white/20 transition-all"
         >
-          <span className="text-base md:text-lg">𝕏</span>
+          <Facebook className="h-5 w-5 md:h-6 md:w-6" />
         </a>
         <a 
           href="#" 
           className="w-10 h-10 md:w-12 md:h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:text-green-400 hover:bg-white/20 transition-all"
         >
-          <span className="text-base md:text-lg">f</span>
-        </a>
-        <a 
-          href="#" 
-          className="w-10 h-10 md:w-12 md:h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:text-green-400 hover:bg-white/20 transition-all"
-        >
-          <span className="text-base md:text-lg">📷</span>
-        </a>
-        <a 
-          href="#" 
-          className="w-10 h-10 md:w-12 md:h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:text-green-400 hover:bg-white/20 transition-all"
-        >
-          <span className="text-base md:text-lg">in</span>
+          <Instagram className="h-5 w-5 md:h-6 md:w-6" />
         </a>
       </div>
     </div>

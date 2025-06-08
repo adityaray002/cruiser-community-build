@@ -70,7 +70,7 @@ const Booking = () => {
         default:
           return false;
       }
-    } else {
+    } else if (selectedServiceType === "monthly") {
       // monthly
       switch (currentStep) {
         case 1:
@@ -85,6 +85,7 @@ const Booking = () => {
           return false;
       }
     }
+    return false;
   };
 
   const handleNextStep = () => {
@@ -197,7 +198,9 @@ const Booking = () => {
                       {isCompleted ? "✓" : stepNum}
                     </div>
                     <div className="flex-1">
-                      <div className="text-xs text-gray-400 mb-1">STEP {stepNum}</div>
+                      <div className={`text-xs mb-1 ${isActive ? 'text-black font-bold' : 'text-gray-400'}`}>
+                        STEP {stepNum}
+                      </div>
                       <span className="text-sm font-semibold">{title}</span>
                       <p className="text-xs mt-1">
                         {title === "Service Type" && "Choose service type"}
@@ -257,7 +260,7 @@ const Booking = () => {
                       </div>
                       <span className="text-sm font-semibold">{title}</span>
                     </div>
-                    <p className="text-xs ml-9">
+                    <p className={`text-xs ml-9 ${isActive ? 'text-black font-bold' : ''}`}>
                       {title === "Service Type" && "Choose type"}
                       {title === "Select Car" && "Select vehicle"}
                       {title === "Washing Plan" && "Pick plan"}
@@ -271,17 +274,19 @@ const Booking = () => {
             </div>
           )}
 
-          {/* Current Selection Summary */}
-          <div className="mb-6">
-            <BookingSummary
-              selectedServiceType={selectedServiceType}
-              selectedCar={selectedCar}
-              selectedPlan={selectedPlan}
-              selectedServices={selectedServices}
-              customerName={customerName}
-              onEditStep={handleStepClick}
-            />
-          </div>
+          {/* Current Selection Summary - Only show on final step */}
+          {currentStep === totalSteps && (
+            <div className="mb-6">
+              <BookingSummary
+                selectedServiceType={selectedServiceType}
+                selectedCar={selectedCar}
+                selectedPlan={selectedPlan}
+                selectedServices={selectedServices}
+                customerName={customerName}
+                onEditStep={handleStepClick}
+              />
+            </div>
+          )}
 
           {/* Step content */}
           <AnimatePresence mode="wait" initial={false}>
@@ -385,7 +390,7 @@ const Booking = () => {
           <div className="flex flex-col sm:flex-row justify-between gap-4 mt-6 md:mt-8">
             <Button
               variant="outline"
-              className="border-green-400 text-green-400 hover:bg-green-400 hover:text-black bg-gray-800 w-full sm:w-auto"
+              className="border-green-400 text-green-400 hover:bg-green-400 hover:text-black bg-transparent w-full sm:w-auto"
               onClick={handlePrevStep}
               disabled={currentStep === 1}
             >
