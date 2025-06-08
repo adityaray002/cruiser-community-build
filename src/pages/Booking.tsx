@@ -39,14 +39,14 @@ const Booking = () => {
     "Washing Plan",
     "Additional Services",
     "Customer Details",
-    "Summary",
+    "Review and book now",
   ];
 
   const stepsForMonthly = [
     "Service Type",
     "Washing Plan",
     "Customer Details",
-    "Summary",
+    "Review and book now",
   ];
 
   const steps = selectedServiceType === "one-time" ? stepsForOneTime : stepsForMonthly;
@@ -215,7 +215,7 @@ const Booking = () => {
                         {title === "Washing Plan" && "Pick washing plan"}
                         {title === "Additional Services" && "Optional extras"}
                         {title === "Customer Details" && "Enter your info"}
-                        {title === "Summary" && "Review & confirm"}
+                        {title === "Review and book now" && "Review & confirm"}
                       </p>
                     </div>
                   </motion.button>
@@ -273,25 +273,11 @@ const Booking = () => {
                       {title === "Washing Plan" && "Pick plan"}
                       {title === "Additional Services" && "Optional extras"}
                       {title === "Customer Details" && "Your info"}
-                      {title === "Summary" && "Review & confirm"}
+                      {title === "Review and book now" && "Review & confirm"}
                     </p>
                   </motion.button>
                 );
               })}
-            </div>
-          )}
-
-          {/* Current Selection Summary - Always visible except on final step */}
-          {currentStep !== totalSteps && (selectedServiceType || selectedCar || selectedPlan || selectedServices.length > 0 || customerName) && (
-            <div className="mb-6">
-              <BookingSummary
-                selectedServiceType={selectedServiceType}
-                selectedCar={selectedCar}
-                selectedPlan={selectedPlan}
-                selectedServices={selectedServices}
-                customerName={customerName}
-                onEditStep={handleStepClick}
-              />
             </div>
           )}
 
@@ -387,7 +373,7 @@ const Booking = () => {
           <div className="flex flex-col sm:flex-row justify-between gap-4 mt-6 md:mt-8">
             <Button
               variant="outline"
-              className="border-green-400 text-green-400 hover:bg-green-400 hover:text-black bg-gray-800 w-full sm:w-auto"
+              className="border-green-400 text-green-400 hover:bg-green-400 hover:text-black bg-gray-900 w-full sm:w-auto"
               onClick={handlePrevStep}
               disabled={currentStep === 1}
             >

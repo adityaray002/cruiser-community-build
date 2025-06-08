@@ -84,7 +84,7 @@ const BookingSummary = ({
 
   return (
     <div className="p-6 bg-gray-900 rounded-lg text-white max-w-md mx-auto">
-      <h2 className="text-2xl font-semibold mb-4 text-green-400">Current Selection</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-green-400">Review and book now</h2>
 
       {selectedServiceType && (
         <div className="mb-4">
