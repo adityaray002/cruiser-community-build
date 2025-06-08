@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -5,64 +6,66 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 interface PricingPlansProps {
   selectedPlan: string;
   onPlanSelect: (plan: string) => void;
+  selectedCar: string;
 }
 
-const OneTimePricingPlans = ({ selectedPlan, onPlanSelect }: PricingPlansProps) => {
-  const plans = [
-    {
-      name: "Exterior + Interior Wash",
-      price: 39,
-      currency: "INR",
-      features: [
-        "Exterior Shampooing",
-        "Tyre Dressing",
-        "Interior Cleaning + Vaccum",
-        "Exterior Black Part Polish",
-        "Microfibre Cloth",
-        "Interior Black Part Polishing",
-        "Footmat Clean"
+const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: PricingPlansProps) => {
+  const getPlansForCar = (carType: string) => {
+    const basePlans = {
+      "Sedan": [
+        { name: "Exterior + Interior Wash", price: 599 },
+        { name: "Exterior Wash Only", price: 399 },
+        { name: "Interior Wash Only", price: 299 },
+        { name: "Waterless", price: 349 }
       ],
-      highlighted: false
-    },
-    {
-      name: "Exterior Wash", 
-      price: 55,
-      currency: "INR",
-      features: [
-        "Exterior Shampooing",
-        "Exterior Polish", 
-        "Tyre Dressing",
-        "Exterior Black Part Polish",
-        "Microfibre Cloth"
+      "SUV": [
+        { name: "Exterior + Interior Wash", price: 699 },
+        { name: "Exterior Wash Only", price: 499 },
+        { name: "Interior Wash Only", price: 349 },
+        { name: "Waterless", price: 399 }
       ],
-      highlighted: false
-    },
-    {
-      name: "Interior Wash", 
-      price: 55,
-      currency: "INR",
-      features: [
-        "Interior Cleaning + Vaccum",
-        "Interior Black Part Polishing", 
-        "Footmat Clean",
-        "Seats Cleaning",
-        "Microfibre Cloth"
+      "Hatchback": [
+        { name: "Exterior + Interior Wash", price: 499 },
+        { name: "Exterior Wash Only", price: 349 },
+        { name: "Interior Wash Only", price: 299 },
+        { name: "Waterless", price: 349 }
       ],
-      highlighted: false
-    },{
-      name: "One Time Luxury License", 
-      price: 55,
-      currency: "INR",
-      features: [
-        "Secure your customer usage",
-        "View basic analytics", 
-        "Up to 900 customer profiles",
-        "Custom network name"
-      ],
-      highlighted: false
-    }
+      "Luxury": [
+        { name: "Exterior + Interior Wash", price: 699 },
+        { name: "Exterior Wash Only", price: 499 },
+        { name: "Interior Wash Only", price: 349 },
+        { name: "Waterless", price: 399 }
+      ]
+    };
 
-  ];
+    const standardFeatures = [
+      "Exterior Shampooing",
+      "Tyre Dressing", 
+      "Interior Cleaning + Vaccum",
+      "Exterior Black Part Polish",
+      "Microfibre Cloth",
+      "Interior Black Part Polishing",
+      "Footmat Clean"
+    ];
+
+    const waterlessFeatures = [
+      "Exterior Shampooing",
+      "Exterior Polish",
+      "Tyre Dressing",
+      "Exterior Black Part Polish",
+      "Microfibre Cloth"
+    ];
+
+    return basePlans[carType as keyof typeof basePlans]?.map(plan => ({
+      ...plan,
+      currency: "₹",
+      features: plan.name === "Waterless" ? waterlessFeatures : standardFeatures,
+      highlighted: false,
+      showNote: plan.name !== "Waterless"
+    })) || [];
+  };
+
+  const plans = getPlansForCar(selectedCar);
 
   return (
     <div>
@@ -85,7 +88,7 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect }: PricingPlansProps) 
                 <div className="text-center mb-3">
                   <span className="text-sm font-bold text-white">{plan.currency}</span>
                   <span className="text-xl font-bold text-white">{plan.price}</span>
-                  <span className="text-xs text-gray-400">/month</span>
+                  <span className="text-xs text-gray-400">/wash</span>
                 </div>
                 
                 <h3 className="text-green-400 font-semibold text-xs text-center mb-3">
@@ -100,6 +103,12 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect }: PricingPlansProps) 
                     </div>
                   ))}
                 </div>
+
+                {plan.showNote && (
+                  <div className="text-xs text-yellow-400 mb-2 text-center">
+                    Note: Power socket and water required
+                  </div>
+                )}
                 
                 <Button 
                   className={`w-full text-xs py-1 h-8 ${
@@ -139,14 +148,14 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect }: PricingPlansProps) 
                 <div className="text-center mb-4">
                   <span className="text-xl lg:text-2xl font-bold text-white">{plan.currency}</span>
                   <span className="text-3xl lg:text-4xl font-bold text-white">{plan.price}</span>
-                  <span className="text-gray-400">/month</span>
+                  <span className="text-gray-400">/wash</span>
                 </div>
                 
                 <h3 className="text-green-400 font-semibold text-base lg:text-lg text-center mb-4">
                   {plan.name}
                 </h3>
                 
-                <div className="space-y-2 mb-6">
+                <div className="space-y-2 mb-4">
                   {plan.features.map((feature, i) => (
                     <div key={i} className="flex items-center text-xs lg:text-sm text-gray-300">
                       <span className="text-green-400 mr-2">✓</span>
@@ -154,6 +163,12 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect }: PricingPlansProps) 
                     </div>
                   ))}
                 </div>
+
+                {plan.showNote && (
+                  <div className="text-xs text-yellow-400 mb-4 text-center">
+                    Note: Power socket and water required
+                  </div>
+                )}
                 
                 <Button 
                   className={`w-full ${

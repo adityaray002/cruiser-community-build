@@ -60,7 +60,7 @@ const Booking = () => {
         case 3:
           return selectedPlan !== "";
         case 4:
-          return true;
+          return true; // Additional services are optional
         case 5:
           return customerName.trim() !== "";
         case 6:
@@ -211,7 +211,7 @@ const Booking = () => {
                       selectedServiceType={selectedServiceType}
                       onServiceTypeSelect={(val) => {
                         setSelectedServiceType(val);
-                        setCurrentStep(1); // reset step on service type change
+                        setCurrentStep(1);
                       }}
                     />
                   )}
@@ -219,7 +219,11 @@ const Booking = () => {
                     <CarSelection selectedCar={selectedCar} onCarSelect={setSelectedCar} />
                   )}
                   {currentStep === 3 && (
-                    <OneTimePricingPlans selectedPlan={selectedPlan} onPlanSelect={setSelectedPlan} />
+                    <OneTimePricingPlans 
+                      selectedPlan={selectedPlan} 
+                      onPlanSelect={setSelectedPlan}
+                      selectedCar={selectedCar}
+                    />
                   )}
                   {currentStep === 4 && (
                     <ServiceSelection
