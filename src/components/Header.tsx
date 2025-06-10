@@ -36,7 +36,7 @@ const Header =  ({ showNav = true, onCartOpen }: HeaderProps) => {
         {/* Social Icons - Desktop and Mobile */}
         <div className="flex items-center space-x-3">
           <a 
-            href="#" 
+            href="https://www.facebook.com/share/1EUVLn1QoN/" 
             className="w-8 h-8 md:w-10 md:h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:text-green-400 hover:bg-white/20 transition-all"
           >
             <Facebook className="h-4 w-4 md:h-5 md:w-5" />

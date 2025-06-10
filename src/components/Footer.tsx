@@ -16,7 +16,7 @@ const Footer = () => {
           <p className="text-sm text-gray-400">Your trusted doorstep car wash partner.</p>
           <div className="flex space-x-4 mt-2">
             <a href="https://www.instagram.com/cleancruisers.in?igsh=MTNtbnI1bWl0ZWoyYQ==" className="text-gray-400 hover:text-green-400"><FaInstagram /></a>
-            <a href="#" className="text-gray-400 hover:text-green-400"><FaFacebookF /></a>
+            <a href="https://www.facebook.com/share/1EUVLn1QoN/" className="text-gray-400 hover:text-green-400"><FaFacebookF /></a>
             <a href="https://wa.me/918920230357" className="text-gray-400 hover:text-green-400"><FaWhatsapp /></a>
             {/* <a href="#" className="text-gray-400 hover:text-green-400"><FaXTwitter /></a> */}
           </div>

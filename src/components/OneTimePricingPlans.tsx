@@ -12,34 +12,34 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
   const getPlansForCar = (carType: string) => {
     const basePlans = {
       "Sedan": [
-        { name: "Exterior + Interior Wash", price: 599 },
-        { name: "Exterior Wash Only", price: 399 },
-        { name: "Interior Deep Clean", price: 299 },
-        { name: "Waterless", price: 349 }
+        { name: "exterior wash + interior wash", label: "Exterior + Interior Wash", price: 599 },
+        { name: "exterior wash only", label: "Exterior Wash Only", price: 399 },
+        { name: "interior wash only", label: "Interior Deep Clean", price: 299 },
+        { name: "waterless", label: "Waterless", price: 349 }
       ],
       "SUV": [
-        { name: "Exterior + Interior Wash", price: 699 },
-        { name: "Exterior Wash Only", price: 499 },
-        { name: "Interior Deep Clean", price: 349 },
-        { name: "Waterless", price: 399 }
+        { name: "exterior wash + interior wash", label: "Exterior + Interior Wash", price: 699 },
+        { name: "exterior wash only", label: "Exterior Wash Only", price: 499 },
+        { name: "interior wash only", label: "Interior Deep Clean", price: 349 },
+        { name: "waterless", label: "Waterless", price: 399 }
       ],
       "Hatchback": [
-        { name: "Exterior + Interior Wash", price: 499 },
-        { name: "Exterior Wash Only", price: 349 },
-        { name: "Interior Deep Clean", price: 299 },
-        { name: "Waterless", price: 349 }
+        { name: "exterior wash + interior wash", label: "Exterior + Interior Wash", price: 499 },
+        { name: "exterior wash only", label: "Exterior Wash Only", price: 349 },
+        { name: "interior wash only", label: "Interior Deep Clean", price: 299 },
+        { name: "waterless", label: "Waterless", price: 349 }
       ],
       "Luxury": [
-        { name: "Exterior + Interior Wash", price: 699 },
-        { name: "Exterior Wash Only", price: 499 },
-        { name: "Interior Deep Clean", price: 349 },
-        { name: "Waterless", price: 399 }
+        { name: "exterior wash + interior wash", label: "Exterior + Interior Wash", price: 699 },
+        { name: "exterior wash only", label: "Exterior Wash Only", price: 499 },
+        { name: "interior wash only", label: "Interior Deep Clean", price: 349 },
+        { name: "waterless", label: "Waterless", price: 399 }
       ]
     };
 
     const standardFeatures = [
       "Foam Wash",
-      "Tyre Dressing", 
+      "Tyre Dressing",
       "Interior Cleaning + Vaccum",
       "Exterior Black Part Polish",
       "Microfibre Cloth",
@@ -59,9 +59,9 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
     return basePlans[carType as keyof typeof basePlans]?.map(plan => ({
       ...plan,
       currency: "₹",
-      features: plan.name === "Waterless" ? waterlessFeatures : standardFeatures,
+      features: plan.name === "waterless" ? waterlessFeatures : standardFeatures,
       highlighted: false,
-      showNote: plan.name !== "Waterless"
+      showNote: plan.name !== "waterless"
     })) || [];
   };
 
@@ -73,13 +73,13 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
       <div className="md:hidden">
         <div className="grid grid-cols-2 gap-3">
           {plans.map((plan, index) => (
-            <Card 
-              key={index} 
+            <Card
+              key={index}
               className={`cursor-pointer transition-all ${
                 selectedPlan === plan.name
-                  ? 'bg-gray-700 border-green-400' 
-                  : plan.highlighted 
-                  ? 'bg-gray-700 border-green-400' 
+                  ? 'bg-gray-700 border-green-400'
+                  : plan.highlighted
+                  ? 'bg-gray-700 border-green-400'
                   : 'bg-gray-800 border-gray-600 hover:border-gray-500'
               }`}
               onClick={() => onPlanSelect(plan.name)}
@@ -90,11 +90,11 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
                   <span className="text-xl font-bold text-white">{plan.price}</span>
                   <span className="text-xs text-gray-400">/wash</span>
                 </div>
-                
+
                 <h3 className="text-green-400 font-semibold text-xs text-center mb-3">
-                  {plan.name}
+                  {plan.label}
                 </h3>
-                
+
                 <div className="space-y-1 mb-3 flex-grow">
                   {plan.features.map((feature, i) => (
                     <div key={i} className="flex items-center text-xs text-gray-300">
@@ -109,11 +109,11 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
                     Note: Power socket and water required
                   </div>
                 )}
-                
-                <Button 
+
+                <Button
                   className={`w-full text-xs py-1 h-8 mt-auto ${
                     selectedPlan === plan.name
-                      ? 'bg-green-400 hover:bg-green-500 text-black' 
+                      ? 'bg-green-400 hover:bg-green-500 text-black'
                       : 'bg-gray-600 hover:bg-gray-500 text-white'
                   }`}
                 >
@@ -130,16 +130,16 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
         <Button variant="ghost" size="icon" className="text-white h-10 w-10 flex-shrink-0">
           <ArrowLeft className="h-6 w-6" />
         </Button>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 flex-1 mx-6 lg:mx-8">
           {plans.map((plan, index) => (
-            <Card 
-              key={index} 
+            <Card
+              key={index}
               className={`cursor-pointer transition-all ${
                 selectedPlan === plan.name
-                  ? 'bg-gray-700 border-green-400' 
-                  : plan.highlighted 
-                  ? 'bg-gray-700 border-green-400' 
+                  ? 'bg-gray-700 border-green-400'
+                  : plan.highlighted
+                  ? 'bg-gray-700 border-green-400'
                   : 'bg-gray-800 border-gray-600 hover:border-gray-500'
               }`}
               onClick={() => onPlanSelect(plan.name)}
@@ -150,11 +150,11 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
                   <span className="text-3xl lg:text-4xl font-bold text-white">{plan.price}</span>
                   <span className="text-gray-400">/wash</span>
                 </div>
-                
+
                 <h3 className="text-green-400 font-semibold text-base lg:text-lg text-center mb-4">
-                  {plan.name}
+                  {plan.label}
                 </h3>
-                
+
                 <div className="space-y-2 mb-4 flex-grow">
                   {plan.features.map((feature, i) => (
                     <div key={i} className="flex items-center text-xs lg:text-sm text-gray-300">
@@ -169,11 +169,11 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
                     Note: Power socket and water required
                   </div>
                 )}
-                
-                <Button 
+
+                <Button
                   className={`w-full mt-auto ${
                     selectedPlan === plan.name
-                      ? 'bg-green-400 hover:bg-green-500 text-black' 
+                      ? 'bg-green-400 hover:bg-green-500 text-black'
                       : 'bg-gray-600 hover:bg-gray-500 text-white'
                   }`}
                 >
@@ -183,7 +183,7 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
             </Card>
           ))}
         </div>
-        
+
         <Button variant="ghost" size="icon" className="text-green-400 h-10 w-10 flex-shrink-0">
           <ArrowRight className="h-6 w-6" />
         </Button>

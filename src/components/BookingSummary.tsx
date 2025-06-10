@@ -1,4 +1,3 @@
-
 import React from "react";
 
 interface BookingSummaryProps {
@@ -16,7 +15,6 @@ const serviceTypeLabels: Record<string, string> = {
   "daily-car-wash": "Daily Car Wash",
 };
 
-// Pricing data for one-time services
 const carPricing: Record<string, Record<string, number>> = {
   "Sedan": {
     "exterior wash + interior wash": 599,
@@ -44,16 +42,15 @@ const carPricing: Record<string, Record<string, number>> = {
   }
 };
 
-// Additional services pricing
 const additionalServicesPricing: Record<string, number> = {
-  "rubbing": 299,
+  "rubbing": 1299,
   "3m-wax": 399,
-  "dry-cleaning": 349,
-  "rubbing-wax": 649,
-  "full-package": 899,
-  "rubbing-dry": 599,
-  "wax-dry": 699,
-  "air-freshener": 99
+  "dry-cleaning": 599,
+  "rubbing-wax": 1499,
+  "full-package": 1999,
+  "rubbing-dry": 1599,
+  "wax-dry": 999,
+  "air-freshener": 149
 };
 
 const BookingSummary = ({
@@ -66,21 +63,23 @@ const BookingSummary = ({
 }: BookingSummaryProps) => {
   const calculateTotal = () => {
     let total = 0;
-    
-    // Add base plan cost
-    if (selectedServiceType === "one-time" && selectedCar && selectedPlan) {
-      total += carPricing[selectedCar]?.[selectedPlan.toLowerCase()] || 0;
+
+    const normalizedCar = selectedCar?.trim();
+    const normalizedPlan = selectedPlan?.toLowerCase().trim();
+
+    if (normalizedCar && normalizedPlan) {
+      total += carPricing[normalizedCar]?.[normalizedPlan] || 0;
     }
-    
-    // Add additional services cost
+
     selectedServices.forEach(serviceId => {
       total += additionalServicesPricing[serviceId] || 0;
     });
-    
+
     return total;
   };
 
   const total = calculateTotal();
+  const basePrice = carPricing[selectedCar?.trim()]?.[selectedPlan?.toLowerCase().trim()] || 0;
 
   return (
     <div className="p-6 bg-gray-900 rounded-lg text-white max-w-md mx-auto">
@@ -120,7 +119,7 @@ const BookingSummary = ({
         <div className="mb-4">
           <div className="flex justify-between items-center">
             <span className="font-semibold">Washing Plan:</span>
-            <span>{selectedPlan}</span>
+            <span>{selectedPlan} — ₹{basePrice}</span>
             <button 
               className="text-green-400 underline ml-2 text-sm"
               onClick={() => onEditStep(selectedServiceType === "one-time" ? 3 : 2)}
@@ -136,9 +135,11 @@ const BookingSummary = ({
           <div className="flex justify-between items-start">
             <span className="font-semibold">Additional Services:</span>
             <div className="flex-1 ml-4">
-              <ul className="list-disc">
+              <ul className="list-disc pl-4">
                 {selectedServices.map((service) => (
-                  <li key={service}>{service}</li>
+                  <li key={service}>
+                    {service} — ₹{additionalServicesPricing[service] || 0}
+                  </li>
                 ))}
               </ul>
             </div>
