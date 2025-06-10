@@ -73,25 +73,25 @@ const ServicesSection = () => {
     {
       icon: "❄️",
       title: "Contactless Washing",
-      description: "Vestibulum tortor risus, rutrum at congue sed ultricies finibus.",
+      description: "Fully touch-free washing to protect your car’s paint and ensure a hygienic experience.",
       rating: 4
     },
     {
       icon: "🛡️",
       title: "Safety Materials",
-      description: "Cras eleifend tristique metus, eu gravida diam tempor consectetur aliquam.",
+      description: "We use non-toxic, car-safe materials that are gentle on paint and tough on dirt.",
       rating: 5
     },
     {
       icon: "⚙️",
       title: "Modern Equipment",
-      description: "Fusce maximus molestie nisl, ut dapibus libero vestibulum aliquam.",
+      description: "High-performance tools for deep, efficient, and scratch-free cleaning every time.",
       rating: 4
     },
     {
       icon: "🌪️",
       title: "Extensive Cleaning",
-      description: "Sed blandit non dolor et amet mi metus tincidunt ut non velit.",
+      description: "We go beyond the basics—interiors, exteriors, tires, and trims cleaned with precision.",
       rating: 4
     }
   ];

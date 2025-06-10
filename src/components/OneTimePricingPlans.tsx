@@ -14,37 +14,38 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
       "Sedan": [
         { name: "Exterior + Interior Wash", price: 599 },
         { name: "Exterior Wash Only", price: 399 },
-        { name: "Interior Wash Only", price: 299 },
+        { name: "Interior Deep Clean", price: 299 },
         { name: "Waterless", price: 349 }
       ],
       "SUV": [
         { name: "Exterior + Interior Wash", price: 699 },
         { name: "Exterior Wash Only", price: 499 },
-        { name: "Interior Wash Only", price: 349 },
+        { name: "Interior Deep Clean", price: 349 },
         { name: "Waterless", price: 399 }
       ],
       "Hatchback": [
         { name: "Exterior + Interior Wash", price: 499 },
         { name: "Exterior Wash Only", price: 349 },
-        { name: "Interior Wash Only", price: 299 },
+        { name: "Interior Deep Clean", price: 299 },
         { name: "Waterless", price: 349 }
       ],
       "Luxury": [
         { name: "Exterior + Interior Wash", price: 699 },
         { name: "Exterior Wash Only", price: 499 },
-        { name: "Interior Wash Only", price: 349 },
+        { name: "Interior Deep Clean", price: 349 },
         { name: "Waterless", price: 399 }
       ]
     };
 
     const standardFeatures = [
-      "Exterior Shampooing",
+      "Foam Wash",
       "Tyre Dressing", 
       "Interior Cleaning + Vaccum",
       "Exterior Black Part Polish",
       "Microfibre Cloth",
       "Interior Black Part Polishing",
-      "Footmat Clean"
+      "Footmat Clean",
+      "Air Freshner"
     ];
 
     const waterlessFeatures = [

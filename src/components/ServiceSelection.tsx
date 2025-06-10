@@ -10,14 +10,14 @@ interface ServiceSelectionProps {
 
 const ServiceSelection = ({ selectedServices, onServicesChange }: ServiceSelectionProps) => {
   const services = [
-    { id: "rubbing", image: "/Rubbing1.jpg", title: "Rubbing", description: "Removes surface scratches and oxidation.", price: "₹299" },
-    { id: "3m-wax", image: "/3M1.jpg", title: "3M Wax", description: "Protective layer with deep shine.", price: "₹399" },
-    { id: "dry-cleaning", image: "/dryclean2.png", title: "Dry Cleaning", description: "Complete interior vacuum and cleaning.", price: "₹349" },
-    { id: "rubbing-wax", image: "/rubbingwax.png", title: "Rubbing + 3M Wax", description: "Combo for deep clean and polish.", price: "₹649" },
-    { id: "full-package", image: "/images/full-package.jpg", title: "Rubbing + Wax + Dry Cleaning", description: "Premium complete cleaning package.", price: "₹899" },
-    { id: "rubbing-dry", image: "/images/rubbing-dry.jpg", title: "Rubbing + Dry Cleaning", description: "Surface restoration and interior care.", price: "₹599" },
-    { id: "wax-dry", image: "/images/wax-dry.jpg", title: "3M Wax + Dry Cleaning", description: "Glossy finish with clean interiors.", price: "₹699" },
-    { id: "air-freshener", image: "/airfreshner.png", title: "Air Freshener", description: "Fresh and pleasant car interior.", price: "₹99" }
+    { id: "rubbing", image: "/Rubbing1.jpg", title: "Rubbing", description: "Removes light scratches, swirl marks, and restores paint clarity.", price: "₹299" },
+    { id: "3m-wax", image: "/3M1.jpg", title: "3M Wax", description: "High-gloss protective wax coating for long-lasting shine.", price: "₹399" },
+    { id: "dry-cleaning", image: "/dryclean2.png", title: "Dry Cleaning", description: "Deep vacuuming and interior fabric cleaning for seats and mats.", price: "₹349" },
+    { id: "rubbing-wax", image: "/rubbingwax.png", title: "Rubbing + 3M Wax", description: "Paint correction plus gloss protection in one combo.", price: "₹649" },
+    { id: "full-package", image: "/RubbingWaxDryclean.png", title: "Rubbing + Wax + Dry Cleaning", description: "Complete exterior and interior rejuvenation package.", price: "₹899" },
+    { id: "rubbing-dry", image: "/RubbingDryclean1.png", title: "Rubbing + Dry Cleaning", description: "Revives paint finish and refreshes car interiors.", price: "₹599" },
+    { id: "wax-dry", image: "/images/wax-dry.jpg", title: "3M Wax + Dry Cleaning", description: "Shiny exterior with spotless and clean interior.", price: "₹699" },
+    { id: "air-freshener", image: "/airfreshner.png", title: "Air Freshener", description: "Keeps your car smelling fresh and inviting after every drive.", price: "₹99" }
   ];
 
   const toggleService = (serviceId: string) => {

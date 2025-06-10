@@ -17,9 +17,11 @@ const Header =  ({ showNav = true, onCartOpen }: HeaderProps) => {
     <header className="absolute top-0 left-0 right-0 z-50 p-4 md:p-6">
       <div className="flex items-center justify-between">
         {/* Logo */}
-        <div className="text-xl md:text-2xl font-bold text-white italic">
-          Car Wash
+        <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/')}>
+          <img src="LOGOFINAL.png" alt="CleanCruisers Logo" className="h-14 w-14 md:h-13 md:w-13 object-contain rounded-full" />
+          <span className="text-xl md:text-2xl font-bold text-white">CleanCruisers</span>
         </div>
+
         
         {/* Desktop Navigation */}
         {showNav && (

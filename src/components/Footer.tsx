@@ -1,56 +1,65 @@
+import React from "react";
+import { FaFacebookF, FaInstagram, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
+import Logo from "/LOGOFINAL.png"; // Adjust this based on your project structure
 
 const Footer = () => {
   return (
-    <footer className="py-12 md:py-16 px-4 md:px-6 bg-gray-900">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-          {/* Logo and Copyright */}
-          <div className="sm:col-span-2 lg:col-span-1">
-            <div className="text-xl md:text-2xl font-bold text-white italic mb-4">Car Wash</div>
-            <p className="text-gray-400 text-sm">©2021 Car Wash. All Rights Reserved</p>
+    <footer className="bg-black text-white py-10 px-4 md:px-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+
+        {/* Logo & Social */}
+        <div className="space-y-4">
+          <div className="flex items-center space-x-2">
+            <img src={Logo} alt="CleanCruisers Logo" className="h-10 w-auto" />
+            <span className="text-xl font-bold text-white">CleanCruisers</span>
           </div>
-          
-          {/* Page Links */}
-          <div>
-            <h4 className="text-white font-semibold mb-4 text-sm md:text-base">PAGE</h4>
-            <div className="space-y-2">
-              <a href="#" className="block text-gray-400 hover:text-green-400 text-xs md:text-sm">Privacy and Cookie Policy</a>
-              <a href="#" className="block text-gray-400 hover:text-green-400 text-xs md:text-sm">Search Terms</a>
-              <a href="#" className="block text-gray-400 hover:text-green-400 text-xs md:text-sm">Orders and Returns</a>
-              <a href="#" className="block text-gray-400 hover:text-green-400 text-xs md:text-sm">Advanced Search</a>
-              <a href="#" className="block text-gray-400 hover:text-green-400 text-xs md:text-sm">Contact Us</a>
-            </div>
-          </div>
-          
-          {/* Car Links */}
-          <div>
-            <h4 className="text-white font-semibold mb-4 text-sm md:text-base">CAR</h4>
-            <div className="space-y-2">
-              <a href="#" className="block text-gray-400 hover:text-green-400 text-xs md:text-sm">Privacy and Cookie Policy</a>
-              <a href="#" className="block text-gray-400 hover:text-green-400 text-xs md:text-sm">Search Terms</a>
-              <a href="#" className="block text-gray-400 hover:text-green-400 text-xs md:text-sm">Orders and Returns</a>
-              <a href="#" className="block text-gray-400 hover:text-green-400 text-xs md:text-sm">Advanced Search</a>
-              <a href="#" className="block text-gray-400 hover:text-green-400 text-xs md:text-sm">Contact Us</a>
-            </div>
-          </div>
-          
-          {/* Services and Contact */}
-          <div>
-            <h4 className="text-white font-semibold mb-4 text-sm md:text-base">SERVICES</h4>
-            <div className="space-y-2 mb-4">
-              <a href="#" className="block text-gray-400 hover:text-green-400 text-xs md:text-sm">Privacy and Cookie Policy</a>
-              <a href="#" className="block text-gray-400 hover:text-green-400 text-xs md:text-sm">Search Terms</a>
-              <a href="#" className="block text-gray-400 hover:text-green-400 text-xs md:text-sm">Orders and Returns</a>
-              <a href="#" className="block text-gray-400 hover:text-green-400 text-xs md:text-sm">Advanced Search</a>
-              <a href="#" className="block text-gray-400 hover:text-green-400 text-xs md:text-sm">Contact Us</a>
-            </div>
-            <div className="text-xs md:text-sm text-gray-400 space-y-1">
-              <p>(303) 985-0105, (303) 555-0105</p>
-              <p>info@info.com</p>
-              <p className="mt-2">2972 Westheimer Rd. Santa Ana,<br />Illinois 85486</p>
-            </div>
+          <p className="text-sm text-gray-400">Your trusted doorstep car wash partner.</p>
+          <div className="flex space-x-4 mt-2">
+            <a href="#" className="text-gray-400 hover:text-green-400"><FaInstagram /></a>
+            <a href="#" className="text-gray-400 hover:text-green-400"><FaFacebookF /></a>
+            <a href="#" className="text-gray-400 hover:text-green-400"><FaWhatsapp /></a>
+            <a href="#" className="text-gray-400 hover:text-green-400"><FaXTwitter /></a>
           </div>
         </div>
+
+        {/* Pages */}
+        <div>
+          <h4 className="text-green-400 font-semibold mb-4 text-base">Pages</h4>
+          <ul className="space-y-2">
+            <li><a href="#home" className="text-gray-400 hover:text-white text-sm">Home</a></li>
+            <li><a href="#booking" className="text-gray-400 hover:text-white text-sm">Book a Wash</a></li>
+            <li><a href="#about" className="text-gray-400 hover:text-white text-sm">About Us</a></li>
+            <li><a href="#contact" className="text-gray-400 hover:text-white text-sm">Contact</a></li>
+          </ul>
+        </div>
+
+        {/* Services */}
+        <div>
+          <h4 className="text-green-400 font-semibold mb-4 text-base">Services</h4>
+          <ul className="space-y-2">
+            <li className="text-gray-400 text-sm">Daily Premium Car Wash</li>
+            <li className="text-gray-400 text-sm">Premium Doorstep Car Wash</li>
+            <li className="text-gray-400 text-sm">Interior Detailing</li>
+            <li className="text-gray-400 text-sm">Exterior Polishing</li>
+          </ul>
+        </div>
+
+        {/* Contact */}
+        <div>
+          <h4 className="text-green-400 font-semibold mb-4 text-base">Contact Us</h4>
+          <ul className="space-y-2 text-sm text-gray-400">
+            <li>📍 Plot No. 66, Upper Ground Floor A-Block,</li>
+            <li>Bhagwati Garden Road, Uttam Nagar</li>
+            <li>New Delhi - 110059, India</li>
+            <li>📞 +91 89202 30357</li>
+            <li>📧 cleancruisers.in@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Copyright */}
+      <div className="border-t border-gray-700 mt-10 pt-6 text-center text-xs text-gray-500">
+        © 2025 CleanCruisers. All rights reserved.
       </div>
     </footer>
   );

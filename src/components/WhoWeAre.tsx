@@ -76,13 +76,17 @@ const WhoWeAre = () => {
 
           {/* ✅ Text on the Right */}
           <div className="px-2 sm:px-4 text-center lg:text-left">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
-              Who We Are?
-            </h2>
-            <div className="mx-auto lg:mx-0 w-24 h-1 bg-green-400 rounded animate-pulse mb-4"></div>
+           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
+                Who We Are
+              </h2>
+              <div className="mx-auto lg:mx-0 w-24 h-1 bg-green-400 rounded animate-pulse mb-4"></div>
             <p className="text-gray-300 leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
-              Car detailing is a process that involves thorough cleaning, restoration and finishing of a vehicle, both inside and out. It goes beyond a simple car wash to address every aspect of the vehicle's appearance and condition. Our expert team uses professional-grade tools and techniques to ensure your car looks its absolute best.
-            </p>
+  At CleanCruisers, we deliver professional doorstep car wash and detailing services with a focus on convenience, quality, and eco-friendly practices. From a quick wash to full detailing, we bring the shine to your location using modern tools and safe materials.
+</p>
+<p className="text-gray-300 leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
+  Our trained team ensures your car looks brand new—saving you time and effort. With flexible plans, transparent pricing, and a customer-first approach, CleanCruisers is your go-to for daily and one-time car care.
+</p>
+
             <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
               <Button  onClick={() => navigate("/booking")} className="bg-green-400 hover:bg-green-500 text-black font-semibold w-full sm:w-auto">
                 

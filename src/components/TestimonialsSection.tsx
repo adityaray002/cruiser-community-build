@@ -4,22 +4,22 @@ import { Card, CardContent } from "@/components/ui/card";
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      name: "Sarah Wilson",
+      name: "Priya Sharma",
       title: "Marketing Executive",
-      content: "Outstanding Experience! The car wash exceeded all my expectations. My car has never looked so pristine, and the attention to detail was remarkable. Highly recommend their services.",
-      avatar: "SW"
+      content: "Absolutely delighted with the service! The car looked brand new after the wash. Their attention to detail and doorstep convenience made the entire experience seamless. Highly recommended!",
+      avatar: "PS"
     },
     {
-      name: "Mike Johnson", 
+      name: "Rohit Mehra", 
       title: "Business Owner",
-      content: "Professional and Prompt. The team was incredibly professional and completed the job quickly without compromising on quality. Great value for money and excellent customer service.",
-      avatar: "MJ"
+      content: "Very professional and punctual team. They arrived on time and did a thorough job without cutting corners. Great value for money and hassle-free experience. Will definitely book again.",
+      avatar: "RM"
     },
     {
-      name: "Emma Davis",
+      name: "Ananya Verma",
       title: "Teacher",
-      content: "Exceptional Service. I've been using their services for months now and they consistently deliver exceptional results. My car always looks brand new after every visit.",
-      avatar: "ED"
+      content: "Consistently amazing service! I've been using CleanCruisers for a few months now and my car has never looked better. Their team is polite, efficient, and very reliable.",
+      avatar: "AV"
     }
   ];
   
