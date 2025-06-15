@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Header from "@/components/Header";
 import Cart from "@/components/Cart";
@@ -50,7 +49,7 @@ const Index = () => {
       {/* Floating phone call button */}
       <a
         href="tel:8920230357"
-        className="fixed bottom-6 right-6 z-50 bg-green-400 hover:bg-green-500 shadow-lg rounded-full p-4 flex items-center transition-transform active:scale-95"
+        className="fixed bottom-16 right-6 z-50 bg-green-400 hover:bg-green-500 shadow-lg rounded-full p-4 flex items-center transition-transform active:scale-95"
         style={{ boxShadow: '0 2px 16px rgba(0,255,100,0.20)' }}
         aria-label="Call us"
       >

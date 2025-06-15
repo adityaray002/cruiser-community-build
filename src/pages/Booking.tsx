@@ -34,18 +34,21 @@ const Booking = () => {
     if (!selectedCar) setSelectedCar(carTypes[0]);
   }, [selectedCar]);
 
-  // When service type is 'premium-addons', skip the package step (step 2)
   const isPremiumAddons = selectedServiceType === "premium-addons";
-  // For premium-addons: step 2 skipped. Show {1- Car, 2- Services, 3- Details, 4- Review} as steps.
-  // totalSteps needs to be reduced by 1 for this path
-  const totalSteps = isPremiumAddons ? 4 : 5;
+  const shouldSkipAddons = selectedServiceType === "one-time" || selectedServiceType === "waterless";
+  const totalSteps = isPremiumAddons || shouldSkipAddons ? 4 : 5;
 
-  // Map step number in UI to step content
   const getActualStep = (step: number) => {
     if (isPremiumAddons) {
       // Steps: 1-Car, 2-Services, 3-Details, 4-Review
       if (step === 1) return 1; // CarSelection
       if (step === 2) return 3; // ServiceSelection
+      if (step === 3) return 4; // CustomerDetails
+      if (step === 4) return 5; // BookingSummary
+    } else if (shouldSkipAddons) {
+      // Steps: 1-Car, 2-Package, 3-Details, 4-Review
+      if (step === 1) return 1; // CarSelection
+      if (step === 2) return 2; // OneTimePricingPlans
       if (step === 3) return 4; // CustomerDetails
       if (step === 4) return 5; // BookingSummary
     } else {
@@ -70,7 +73,6 @@ const Booking = () => {
   };
 
   const canProceed = () => {
-    // Map to the real step logic
     const actualStep = getActualStep(currentStep);
 
     // ---- CHANGED: Premium Add-ons requires at least ONE add-on selected. ---
@@ -146,40 +148,25 @@ const Booking = () => {
 
   const getStepTitle = () => {
     const actualStep = getActualStep(currentStep);
-    if (isPremiumAddons) {
-      switch (actualStep) {
-        case 1:
-          return "Select Your Car Type";
-        case 3:
-          return "Additional Services (Optional)";
-        case 4:
-          return "Your Details";
-        case 5:
-          return "Review and Book Now";
-        default:
-          return "";
-      }
-    } else {
-      switch (currentStep) {
-        case 1:
-          return "Select Your Car Type";
-        case 2:
-          return `Choose Your ${
-            selectedServiceType === "waterless"
-              ? "Waterless"
-              : selectedServiceType === "premium-addons"
-              ? "Premium Add-on"
-              : ""
-          } Package`;
-        case 3:
-          return "Additional Services (Optional)";
-        case 4:
-          return "Your Details";
-        case 5:
-          return "Review and Book Now";
-        default:
-          return "";
-      }
+    switch (actualStep) {
+      case 1:
+        return "Select Your Car Type";
+      case 2:
+        const serviceName =
+          selectedServiceType === "waterless"
+            ? "Waterless"
+            : selectedServiceType === "one-time"
+            ? "Doorstep Premium Car wash"
+            : "Premium Add-on";
+        return `Choose Your ${serviceName} Package`;
+      case 3:
+        return "Additional Services (Optional)";
+      case 4:
+        return "Your Details";
+      case 5:
+        return "Review and Book Now";
+      default:
+        return "";
     }
   };
 
@@ -237,7 +224,7 @@ const Booking = () => {
           <div className="text-center mb-6">
             <div className="inline-block bg-green-400/10 border border-green-400 rounded-lg px-4 py-2">
               <span className="text-green-400 font-semibold">
-                {selectedServiceType === 'one-time' && '✨ One-Time Premium Wash'}
+                {selectedServiceType === 'one-time' && '✨ Doorstep Premium Car wash'}
                 {selectedServiceType === 'waterless' && '🌿 Waterless Eco Cleaning'}
                 {selectedServiceType === 'premium-addons' && '💎 Premium Add-ons'}
                 {selectedServiceType === 'monthly' && '🏠 Monthly Doorstep Service'}
