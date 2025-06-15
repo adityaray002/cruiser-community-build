@@ -108,11 +108,9 @@ const ServicesSection = ({ onScrollToPricing }: ServicesSectionProps) => {
 
   const handleServiceClick = (service: any) => {
     if (service.id === 'monthly') {
-      // Redirect to monthly pricing page
       navigate('/monthly-pricing');
       return;
     } else {
-      // Store the selected service type in sessionStorage so it can be used in booking
       sessionStorage.setItem('selectedServiceType', service.id);
       navigate('/booking');
     }
@@ -201,24 +199,11 @@ const ServicesSection = ({ onScrollToPricing }: ServicesSectionProps) => {
                     handleServiceClick(service);
                   }}
                 >
-                  {service.id === 'monthly' ? 'Choose Plan' : 'Book Now'}
+                  Choose Plan
                 </Button>
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        <div className="text-center">
-          <Button 
-            size="lg"
-            className="bg-green-400 hover:bg-green-500 text-black font-semibold px-8 py-4 text-lg"
-            onClick={() => navigate('/booking')}
-          >
-            Book Your Car Wash Now
-          </Button>
-          <p className="text-gray-400 text-sm mt-4">
-            🚗 Same day service • 💧 Water & power required • 🔒 100% safe & insured
-          </p>
         </div>
       </div>
     </section>

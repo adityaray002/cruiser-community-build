@@ -5,15 +5,13 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 const testimonials = [
   {
     name: "Priya Sharma",
-    title: "Marketing Executive",
     content:
       "Absolutely delighted with the service! The car looked brand new after the wash. Their attention to detail and doorstep convenience made the entire experience seamless. Highly recommended!",
-    image: "/avatars/priya.jpg", // Use a realistic local or CDN path for actual deployment
+    image: "/avatars/priya.jpg",
     fallback: "PS",
   },
   {
     name: "Rohit Mehra",
-    title: "Business Owner",
     content:
       "Very professional and punctual team. They arrived on time and did a thorough job without cutting corners. Great value for money and hassle-free experience. Will definitely book again.",
     image: "/avatars/rohit.jpg",
@@ -21,7 +19,6 @@ const testimonials = [
   },
   {
     name: "Ananya Verma",
-    title: "Teacher",
     content:
       "Consistently amazing service! I've been using CleanCruisers for a few months now and my car has never looked better. Their team is polite, efficient, and very reliable.",
     image: "/avatars/ananya.jpg",
@@ -52,9 +49,7 @@ const TestimonialsSection = () => (
               <h4 className="font-semibold text-white text-base">
                 {testimonial.name}
               </h4>
-              <p className="text-green-400 text-sm mb-3">
-                {testimonial.title}
-              </p>
+              {/* Removed job/role titles */}
               <p className="text-gray-300 leading-relaxed text-sm">
                 "{testimonial.content}"
               </p>
@@ -67,4 +62,3 @@ const TestimonialsSection = () => (
 );
 
 export default TestimonialsSection;
-

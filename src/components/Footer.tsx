@@ -1,6 +1,7 @@
+
 import React from "react";
-import { FaFacebookF, FaInstagram, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
-import Logo from "/LOGOFINAL.png"; // Adjust this based on your project structure
+import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa6";
+import Logo from "/LOGOFINAL.png";
 
 const Footer = () => {
   return (
@@ -18,7 +19,6 @@ const Footer = () => {
             <a href="https://www.instagram.com/cleancruisers.in?igsh=MTNtbnI1bWl0ZWoyYQ==" className="text-gray-400 hover:text-green-400"><FaInstagram /></a>
             <a href="https://www.facebook.com/share/1EUVLn1QoN/" className="text-gray-400 hover:text-green-400"><FaFacebookF /></a>
             <a href="https://wa.me/918920230357" className="text-gray-400 hover:text-green-400"><FaWhatsapp /></a>
-            {/* <a href="#" className="text-gray-400 hover:text-green-400"><FaXTwitter /></a> */}
           </div>
         </div>
 
@@ -26,8 +26,8 @@ const Footer = () => {
         <div>
           <h4 className="text-green-400 font-semibold mb-4 text-base">Pages</h4>
           <ul className="space-y-2">
-            <li><a href="#home" className="text-gray-400 hover:text-white text-sm">Home</a></li>
-            <li><a href="#booking" className="text-gray-400 hover:text-white text-sm">Book a Wash</a></li>
+            <li><a href="/" className="text-gray-400 hover:text-white text-sm">Home</a></li>
+            <li><a href="/booking" className="text-gray-400 hover:text-white text-sm">Book a Wash</a></li>
             <li><a href="#about" className="text-gray-400 hover:text-white text-sm">About Us</a></li>
             <li><a href="#contact" className="text-gray-400 hover:text-white text-sm">Contact</a></li>
           </ul>
@@ -37,10 +37,11 @@ const Footer = () => {
         <div>
           <h4 className="text-green-400 font-semibold mb-4 text-base">Services</h4>
           <ul className="space-y-2">
-            <li className="text-gray-400 text-sm">Daily Premium Car Wash</li>
-            <li className="text-gray-400 text-sm">Premium Doorstep Car Wash</li>
-            <li className="text-gray-400 text-sm">Interior Detailing</li>
-            <li className="text-gray-400 text-sm">Exterior Polishing</li>
+            <li><a href="/booking?service=one-time" className="text-gray-400 hover:text-white text-sm">Daily Premium Car Wash</a></li>
+            <li><a href="/booking?service=monthly" className="text-gray-400 hover:text-white text-sm">Premium Doorstep Car Wash</a></li>
+            <li><a href="/booking?service=premium-addons" className="text-gray-400 hover:text-white text-sm">Interior Detailing</a></li>
+            <li><a href="/booking?service=waterless" className="text-gray-400 hover:text-white text-sm">Exterior Polishing</a></li>
+            <li><a href="/monthly-pricing" className="text-gray-400 hover:text-white text-sm">Monthly Plans</a></li>
           </ul>
         </div>
 
