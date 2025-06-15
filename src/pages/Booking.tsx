@@ -135,6 +135,21 @@ const Booking = () => {
     }
   };
 
+  // Final step: Open WhatsApp with pre-filled message
+  const handleBookNow = () => {
+    const phone = "918920230357";
+    let message = `Hello! I would like to book a car wash service.%0A`;
+    message += `Name: ${customerDetails.name}%0A`;
+    message += `Service Type: ${selectedServiceType || "-"}%0A`;
+    message += `Car Type: ${selectedCar || "-"}%0A`;
+    message += `Plan: ${selectedPlan || "-"}%0A`;
+    if (selectedServices.length > 0) {
+      message += `Add-ons: ${selectedServices.join(", ")}%0A`;
+    }
+    const whatsappUrl = `https://wa.me/${phone}?text=${message}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
   return (
     <div className="min-h-screen bg-black text-white">
       <Header onCartOpen={() => {}} />
@@ -187,15 +202,24 @@ const Booking = () => {
             <ArrowLeft className="mr-2 h-4 w-4" />
             Previous
           </Button>
-
-          <Button
-            onClick={nextStep}
-            disabled={!canProceed() || currentStep === totalSteps}
-            className="bg-green-400 hover:bg-green-500 text-black"
-          >
-            {currentStep === totalSteps ? "Book Now" : "Next"}
-            {currentStep !== totalSteps && <ArrowRight className="ml-2 h-4 w-4" />}
-          </Button>
+          {currentStep === totalSteps ? (
+            <Button
+              onClick={handleBookNow}
+              className="bg-green-400 hover:bg-green-500 text-black"
+              disabled={!canProceed()}
+            >
+              Book Now
+            </Button>
+          ) : (
+            <Button
+              onClick={nextStep}
+              disabled={!canProceed() || currentStep === totalSteps}
+              className="bg-green-400 hover:bg-green-500 text-black"
+            >
+              Next
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          )}
         </div>
       </div>
     </div>
