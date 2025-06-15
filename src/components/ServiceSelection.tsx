@@ -8,15 +8,7 @@ interface ServiceSelectionProps {
   isPremiumAddons?: boolean;
 }
 
-// ==== NEW SERVICE NAMES for Premium Add-ons ====
-const premiumServices = [
-  { id: "rubbing", image: "/Rubbing1.jpg", title: "Paint Restoration", description: "Removes scratches and swirl marks for a showroom shine.", price: "₹1299" },
-  { id: "3m-wax", image: "/3M1.jpg", title: "Gloss Wax Coat", description: "Deep gloss wax for premium UV protection and shine.", price: "₹399" },
-  { id: "dry-cleaning", image: "/dryclean2.png", title: "Interior Spa", description: "Complete seat, mat and carpet deep cleaning.", price: "₹599" },
-  { id: "combo-package", image: "/RubbingWaxDryclean.png", title: "Complete Makeover", description: "All-in-one: Paint restoration, wax, and full interior spa.", price: "₹1999" }
-];
-
-// ==== Original list for non-premium-addons ====
+// Always use the same list for both flows
 const standardServices = [
   { id: "rubbing", image: "/Rubbing1.jpg", title: "Rubbing", description: "Removes light scratches, swirl marks, and restores paint clarity.", price: "₹1299" },
   { id: "3m-wax", image: "/3M1.jpg", title: "3M Wax", description: "High-gloss protective wax coating for long-lasting shine.", price: "₹399" },
@@ -29,7 +21,8 @@ const standardServices = [
 ];
 
 const ServiceSelection = ({ selectedServices, onServicesChange, isPremiumAddons }: ServiceSelectionProps) => {
-  const services = isPremiumAddons ? premiumServices : standardServices;
+  // Use standard services always
+  const services = standardServices;
 
   const toggleService = (serviceId: string) => {
     if (selectedServices.includes(serviceId)) {
@@ -39,9 +32,9 @@ const ServiceSelection = ({ selectedServices, onServicesChange, isPremiumAddons 
     }
   };
 
-  // --- Set heading and description ---
+  // Set heading (the rest of the UI logic remains the same)
   const heading = isPremiumAddons ? "Select Add-on(s)" : "Additional Services";
-  // Remove bottom description for premium add-ons (as per your request)
+  // Remove description for premium add-ons
   const description = isPremiumAddons
     ? ""
     : "Optional - You can skip this step if you don't need additional services";
