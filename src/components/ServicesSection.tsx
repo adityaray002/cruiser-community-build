@@ -9,28 +9,6 @@ const ServicesSection = () => {
 
   const services = [
     {
-      icon: "🏠",
-      title: "Monthly Doorstep Service",
-      subtitle: "Daily car wash convenience",
-      description: "Professional car wash at your doorstep every day with flexible monthly plans. Perfect for busy professionals who want their car always clean.",
-      priceRange: "₹799 - ₹1199",
-      originalPrice: "₹1500",
-      savings: "Save ₹301+",
-      features: [
-        "26 Days Exterior Cleaning",
-        "1 Foam Wash + Interior",
-        "Tire Cleaning & Dressing",
-        "At Your Doorstep Daily",
-        "Eco-friendly Products"
-      ],
-      highlights: [
-        { icon: Clock, text: "Same time daily" },
-        { icon: MapPin, text: "Available in Dwarka Mor, Nawada, Uttam Nagar" },
-        { icon: Shield, text: "100% Safe & Insured" }
-      ],
-      popular: true
-    },
-    {
       icon: "✨",
       title: "One-Time Premium Wash",
       subtitle: "Professional deep cleaning",
@@ -50,7 +28,7 @@ const ServicesSection = () => {
         { icon: MapPin, text: "At your location" },
         { icon: Star, text: "Professional team" }
       ],
-      popular: false
+      popular: true
     },
     {
       icon: "🌿",
@@ -95,18 +73,34 @@ const ServicesSection = () => {
         { icon: Clock, text: "2-3 hours" }
       ],
       popular: false
+    },
+    {
+      icon: "🏠",
+      title: "Monthly Doorstep Service",
+      subtitle: "Daily car wash convenience",
+      description: "Professional car wash at your doorstep every day with flexible monthly plans. Perfect for busy professionals who want their car always clean.",
+      priceRange: "₹799 - ₹1199",
+      originalPrice: "₹1500",
+      savings: "Save ₹301+",
+      features: [
+        "26 Days Exterior Cleaning",
+        "1 Foam Wash + Interior",
+        "Tire Cleaning & Dressing",
+        "At Your Doorstep Daily",
+        "Eco-friendly Products"
+      ],
+      highlights: [
+        { icon: Clock, text: "Same time daily" },
+        { icon: MapPin, text: "Available in Dwarka Mor, Nawada, Uttam Nagar" },
+        { icon: Shield, text: "100% Safe & Insured" }
+      ],
+      popular: false
     }
   ];
 
   const handleServiceClick = (service: any) => {
-    // Navigate to booking page with pre-selected service type
-    if (service.title.includes("Monthly")) {
-      navigate('/booking?service=monthly');
-    } else if (service.title.includes("One-Time")) {
-      navigate('/booking?service=one-time');
-    } else {
-      navigate('/booking');
-    }
+    // Navigate directly to booking page since we removed service type selection
+    navigate('/booking');
   };
 
   return (
@@ -205,7 +199,7 @@ const ServicesSection = () => {
             className="bg-green-400 hover:bg-green-500 text-black font-semibold px-8 py-4 text-lg"
             onClick={() => navigate('/booking')}
           >
-            View All Packages & Book Now
+            Book Your Car Wash Now
           </Button>
           <p className="text-gray-400 text-sm mt-4">
             🚗 Same day service • 💧 Water & power required • 🔒 100% safe & insured

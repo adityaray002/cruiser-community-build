@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
-import ServiceTypeSelection from "@/components/ServiceTypeSelection";
 import CarSelection from "@/components/CarSelection";
 import PricingPlans from "@/components/PricingPlans";
 import OneTimePricingPlans from "@/components/OneTimePricingPlans";
@@ -14,7 +13,7 @@ import BookingSummary from "@/components/BookingSummary";
 
 const Booking = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [selectedServiceType, setSelectedServiceType] = useState("");
+  const [selectedServiceType, setSelectedServiceType] = useState("one-time"); // Default to one-time
   const [selectedCar, setSelectedCar] = useState("");
   const [selectedPlan, setSelectedPlan] = useState("");
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
@@ -26,7 +25,7 @@ const Booking = () => {
     address: ""
   });
 
-  const totalSteps = 7;
+  const totalSteps = 6; // Reduced from 7 since we removed service type selection
 
   const nextStep = () => {
     if (currentStep < totalSteps) {
@@ -43,122 +42,58 @@ const Booking = () => {
   const canProceed = () => {
     switch (currentStep) {
       case 1:
-        return selectedServiceType !== "";
-      case 2:
         return selectedCar !== "";
-      case 3:
+      case 2:
         return selectedPlan !== "";
-      case 4:
+      case 3:
         return true; // Optional services
-      case 5:
+      case 4:
         return selectedTime !== "";
-      case 6:
+      case 5:
         return customerDetails.name && customerDetails.phone && customerDetails.address;
       default:
         return false;
     }
   };
 
-  const shouldShowServices = () => {
-    return selectedServiceType === "one-time";
-  };
-
-  const shouldShowMonthlyPlans = () => {
-    return selectedServiceType === "monthly" || selectedServiceType === "daily-car-wash";
-  };
-
-  const shouldShowOneTimePlans = () => {
-    return selectedServiceType === "one-time";
-  };
-
   const renderStep = () => {
     switch (currentStep) {
       case 1:
-        return (
-          <ServiceTypeSelection
-            selectedServiceType={selectedServiceType}
-            onServiceTypeSelect={setSelectedServiceType}
-          />
-        );
-      case 2:
         return (
           <CarSelection
             selectedCar={selectedCar}
             onCarSelect={setSelectedCar}
           />
         );
+      case 2:
+        return (
+          <OneTimePricingPlans
+            selectedPlan={selectedPlan}
+            onPlanSelect={setSelectedPlan}
+          />
+        );
       case 3:
-        if (shouldShowMonthlyPlans()) {
-          return (
-            <PricingPlans
-              selectedPlan={selectedPlan}
-              onPlanSelect={setSelectedPlan}
-              selectedCar={selectedCar}
-            />
-          );
-        } else if (shouldShowOneTimePlans()) {
-          return (
-            <OneTimePricingPlans
-              selectedPlan={selectedPlan}
-              onPlanSelect={setSelectedPlan}
-              selectedCar={selectedCar}
-            />
-          );
-        }
-        return null;
+        return (
+          <ServiceSelection
+            selectedServices={selectedServices}
+            onServicesChange={setSelectedServices}
+          />
+        );
       case 4:
-        if (shouldShowServices()) {
-          return (
-            <ServiceSelection
-              selectedServices={selectedServices}
-              onServicesChange={setSelectedServices}
-            />
-          );
-        } else {
-          return (
-            <TimeSelection
-              selectedTime={selectedTime}
-              onTimeSelect={setSelectedTime}
-            />
-          );
-        }
+        return (
+          <TimeSelection
+            selectedTime={selectedTime}
+            onTimeSelect={setSelectedTime}
+          />
+        );
       case 5:
-        if (shouldShowServices()) {
-          return (
-            <TimeSelection
-              selectedTime={selectedTime}
-              onTimeSelect={setSelectedTime}
-            />
-          );
-        } else {
-          return (
-            <CustomerDetails
-              details={customerDetails}
-              onDetailsChange={setCustomerDetails}
-            />
-          );
-        }
+        return (
+          <CustomerDetails
+            customerDetails={customerDetails}
+            onDetailsChange={setCustomerDetails}
+          />
+        );
       case 6:
-        if (shouldShowServices()) {
-          return (
-            <CustomerDetails
-              details={customerDetails}
-              onDetailsChange={setCustomerDetails}
-            />
-          );
-        } else {
-          return (
-            <BookingSummary
-              serviceType={selectedServiceType}
-              car={selectedCar}
-              plan={selectedPlan}
-              services={selectedServices}
-              time={selectedTime}
-              customerDetails={customerDetails}
-            />
-          );
-        }
-      case 7:
         return (
           <BookingSummary
             serviceType={selectedServiceType}
@@ -177,18 +112,16 @@ const Booking = () => {
   const getStepTitle = () => {
     switch (currentStep) {
       case 1:
-        return "Choose Your Service Type";
-      case 2:
         return "Select Your Car Type";
-      case 3:
+      case 2:
         return "Choose Your Package";
+      case 3:
+        return "Additional Services (Optional)";
       case 4:
-        return shouldShowServices() ? "Additional Services (Optional)" : "Select Date & Time";
+        return "Select Date & Time";
       case 5:
-        return shouldShowServices() ? "Select Date & Time" : "Your Details";
+        return "Your Details";
       case 6:
-        return shouldShowServices() ? "Your Details" : "Review and Book Now";
-      case 7:
         return "Review and Book Now";
       default:
         return "";
