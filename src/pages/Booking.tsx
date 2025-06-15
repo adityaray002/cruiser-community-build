@@ -17,12 +17,11 @@ const Booking = () => {
   const [selectedServiceType, setSelectedServiceType] = useState("");
   const [selectedPlan, setSelectedPlan] = useState("");
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
-  const [selectedTime, setSelectedTime] = useState("");
+  // Removed selectedTime state
+
+  // Update customerDetails to only include 'name'
   const [customerDetails, setCustomerDetails] = useState({
     name: "",
-    phone: "",
-    email: "",
-    address: ""
   });
 
   // Get service type from sessionStorage on component mount
@@ -38,7 +37,8 @@ const Booking = () => {
     if (!selectedCar) setSelectedCar(carTypes[0]);
   }, [selectedCar]);
 
-  const totalSteps = 6;
+  // New: total steps is now 5 (remove Date & Time)
+  const totalSteps = 5;
 
   const nextStep = () => {
     if (currentStep < totalSteps) {
@@ -60,10 +60,9 @@ const Booking = () => {
         return selectedPlan !== "";
       case 3:
         return true; // Optional services
+      // Skip step 4: was Date & Time
       case 4:
-        return selectedTime !== "";
-      case 5:
-        return customerDetails.name && customerDetails.phone && customerDetails.address;
+        return customerDetails.name; // Only require name
       default:
         return false;
     }
@@ -93,21 +92,16 @@ const Booking = () => {
             onServicesChange={setSelectedServices}
           />
         );
+      // REMOVED Date & Time selection step
       case 4:
-        return (
-          <TimeSelection
-            selectedTime={selectedTime}
-            onTimeSelect={setSelectedTime}
-          />
-        );
-      case 5:
+        // This is now the CustomerDetails step (was step 5)
         return (
           <CustomerDetails
             customerDetails={customerDetails}
             onDetailsChange={setCustomerDetails}
           />
         );
-      case 6:
+      case 5:
         return (
           <BookingSummary
             selectedServiceType={selectedServiceType}
@@ -131,11 +125,10 @@ const Booking = () => {
         return `Choose Your ${selectedServiceType === 'waterless' ? 'Waterless' : selectedServiceType === 'premium-addons' ? 'Premium Add-on' : ''} Package`;
       case 3:
         return "Additional Services (Optional)";
+      // case 4: now Your Details
       case 4:
-        return "Select Date & Time";
-      case 5:
         return "Your Details";
-      case 6:
+      case 5:
         return "Review and Book Now";
       default:
         return "";
