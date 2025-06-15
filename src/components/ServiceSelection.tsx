@@ -1,7 +1,7 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Check } from "lucide-react";
+import ServiceDetails from "./ServiceDetails";
 
 interface ServiceSelectionProps {
   selectedServices: string[];
@@ -33,74 +33,31 @@ const ServiceSelection = ({ selectedServices, onServicesChange, isPremiumAddons 
     }
   };
 
-  // Heading for each flow
-  const heading = isPremiumAddons ? "Select Add-on(s)" : "Additional Services";
+  // Show clear heading depending on flow
+  const heading = isPremiumAddons ? "Select Add-on(s)" : null;
 
   return (
     <div>
-      <div className="text-center mb-6">
-        <h2 className="text-xl md:text-3xl font-bold text-white mb-2">{heading}</h2>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-7 mb-6">
-        {services.map((service) => (
-          <Card
+      {heading && (
+        <div className="text-center mb-6">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-white">{heading}</h2>
+          <div className="mt-1 text-green-300 text-sm font-medium">
+            Enhance your wash with these curated add-ons. Tap to select.
+          </div>
+        </div>
+      )}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-6">
+        {standardServices.map((service) => (
+          <ServiceDetails
             key={service.id}
-            className={`relative cursor-pointer border-2 rounded-xl overflow-hidden p-0 shadow-lg hover:shadow-xl transition-all h-full bg-gray-900 ${
-              selectedServices.includes(service.id)
-                ? 'border-green-400'
-                : 'border-gray-700 hover:border-gray-400'
-            }`}
-            onClick={() => toggleService(service.id)}
-          >
-            <CardContent className="p-0 flex flex-col h-full">
-              {/* Image Banner */}
-              <div className="w-full h-32 md:h-36 bg-black relative overflow-hidden flex justify-center items-center">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover object-center"
-                  loading="lazy"
-                  style={{ maxHeight: '100%', borderTopLeftRadius: 12, borderTopRightRadius: 12 }}
-                />
-                {selectedServices.includes(service.id) && (
-                  <span className="absolute top-2 right-2 bg-green-400 text-black rounded-full px-2 py-0.5 text-xs font-semibold shadow">
-                    Selected
-                  </span>
-                )}
-              </div>
-              {/* Info section */}
-              <div className="flex flex-col flex-1 px-4 py-3 gap-1">
-                <h3 className="text-lg font-semibold text-green-400">{service.title}</h3>
-                <div className="flex items-center mb-1">
-                  <span className="text-sm font-bold text-white">{service.price}</span>
-                  {/* You could add a small discount tag etc. here */}
-                </div>
-                <p className="text-gray-200 text-xs mb-1">{service.description}</p>
-                <div>
-                  {/* Details block for extra info (expand if needed) */}
-                  <span className="block bg-gray-800/60 text-gray-400 text-xs rounded px-2 py-1">{service.details}</span>
-                </div>
-                <div className="flex-1" />
-                {/* Select/Check Button at card bottom */}
-                <div className="flex justify-end mt-2">
-                  <Button
-                    size="icon"
-                    className={`h-8 w-8 md:h-10 md:w-10 rounded-full shadow border-2 ${
-                      selectedServices.includes(service.id)
-                        ? 'bg-green-400 hover:bg-green-500 text-black border-green-400'
-                        : 'bg-gray-700 hover:bg-gray-600 text-white border-gray-500'
-                    }`}
-                  >
-                    {selectedServices.includes(service.id) ? (
-                      <Check className="h-4 w-4" />
-                    ) : (
-                      <span className="text-xl leading-none">+</span>
-                    )}
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+            title={service.title}
+            price={service.price}
+            description={service.description}
+            details={service.details}
+            selected={selectedServices.includes(service.id)}
+            image={service.image}
+            onSelect={() => toggleService(service.id)}
+          />
         ))}
       </div>
     </div>
@@ -108,4 +65,3 @@ const ServiceSelection = ({ selectedServices, onServicesChange, isPremiumAddons 
 };
 
 export default ServiceSelection;
-
