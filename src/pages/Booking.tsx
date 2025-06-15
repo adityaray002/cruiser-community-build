@@ -89,7 +89,9 @@ const Booking = () => {
         // In non-premium-addons flow, services are optional
         return true;
       case 4:
-        return customerDetails.name;
+        return !!customerDetails.name;
+      case 5: // On summary page
+        return true;
       default:
         return false;
     }

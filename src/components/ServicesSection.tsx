@@ -15,7 +15,7 @@ const ServicesSection = ({ onScrollToPricing }: ServicesSectionProps) => {
     {
       id: "one-time",
       icon: "✨",
-      title: "One-Time Premium Wash",
+      title: "Doorstep Premium Car wash",
       subtitle: "Professional deep cleaning",
       description: "Complete car detailing with premium products and techniques. Choose from multiple packages based on your car's needs.",
       priceRange: "₹299 - ₹699",
