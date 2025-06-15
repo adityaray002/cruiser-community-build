@@ -187,56 +187,6 @@ const PricingPreview = () => {
           </div>
         </div>
 
-        {/* One-Time Plans */}
-        <div className="mb-12">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-green-400 mb-2">One-Time Premium Wash</h3>
-            <p className="text-gray-300">Professional car wash when you need it</p>
-            <div className="flex items-center justify-center gap-2 mt-2">
-              <Shield className="h-4 w-4 text-green-400" />
-              <span className="text-sm text-gray-400">Same day service available</span>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {oneTimePlans.map((plan, index) => (
-              <Card 
-                key={index} 
-                className="bg-gray-800 border-gray-700 hover:border-green-400 transition-all cursor-pointer transform hover:scale-105 hover:shadow-xl hover:shadow-green-400/20 group"
-                onClick={() => handleOneTimePlanClick(plan)}
-              >
-                <CardContent className="p-6 text-center">
-                  <div className="text-3xl mb-3">{plan.icon}</div>
-                  <h4 className="text-white font-semibold text-lg mb-2">{plan.name}</h4>
-                  <p className="text-gray-400 text-sm mb-3">{plan.description}</p>
-                  
-                  <div className="text-2xl font-bold text-green-400 mb-2">₹{plan.price}</div>
-                  <div className="text-gray-400 text-sm mb-4">{plan.car}</div>
-                  
-                  <div className="text-xs text-gray-300 space-y-1 mb-4">
-                    {plan.features.map((feature, i) => (
-                      <div key={i} className="flex items-center justify-center">
-                        <Check className="h-3 w-3 text-green-400 mr-1" />
-                        {feature}
-                      </div>
-                    ))}
-                  </div>
-
-                  <Button 
-                    className="w-full bg-green-400 hover:bg-green-500 text-black font-semibold group-hover:bg-green-500"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleOneTimePlanClick(plan);
-                    }}
-                  >
-                    Book Now
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
         {/* Additional Services Preview */}
         <div className="bg-gray-800 rounded-lg p-8 text-center">
           <h3 className="text-xl font-bold text-white mb-4">Premium Add-on Services</h3>
