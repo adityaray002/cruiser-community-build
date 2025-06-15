@@ -72,6 +72,11 @@ const Booking = () => {
   const canProceed = () => {
     // Map to the real step logic
     const actualStep = getActualStep(currentStep);
+
+    // ---- CHANGED: Premium Add-ons requires at least ONE add-on selected. ---
+    if (isPremiumAddons && actualStep === 3) {
+      return selectedServices.length > 0;
+    }
     switch (actualStep) {
       case 1:
         return selectedCar !== "";
@@ -79,6 +84,7 @@ const Booking = () => {
         // Step 2 is only used in non-premium-addons flow
         return selectedPlan !== "";
       case 3:
+        // In non-premium-addons flow, services are optional
         return true;
       case 4:
         return customerDetails.name;
@@ -107,10 +113,12 @@ const Booking = () => {
           />
         );
       case 3:
+        // ===== Pass isPremiumAddons and heading text for customisation =====
         return (
           <ServiceSelection
             selectedServices={selectedServices}
             onServicesChange={setSelectedServices}
+            isPremiumAddons={isPremiumAddons}
           />
         );
       case 4:
