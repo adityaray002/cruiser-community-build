@@ -108,16 +108,9 @@ const ServicesSection = ({ onScrollToPricing }: ServicesSectionProps) => {
 
   const handleServiceClick = (service: any) => {
     if (service.id === 'monthly') {
-      // Instead of WhatsApp: scroll to PricingPreview section
-      if (typeof onScrollToPricing === "function") {
-        onScrollToPricing();
-        return;
-      }
-      // Fallback: open WhatsApp if handler not provided
-      const message = `Hi! I'm interested in your Monthly Doorstep Service. I would like to choose a plan for daily car wash at my doorstep. Please provide me with more details about the available monthly plans.`;
-      const phoneNumber = "919999999999";
-      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-      window.open(whatsappUrl, '_blank');
+      // Redirect to monthly pricing page
+      navigate('/monthly-pricing');
+      return;
     } else {
       // Store the selected service type in sessionStorage so it can be used in booking
       sessionStorage.setItem('selectedServiceType', service.id);
