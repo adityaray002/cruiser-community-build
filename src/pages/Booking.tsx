@@ -214,10 +214,8 @@ const Booking = () => {
         {/* Navigation Buttons */}
         <div className="flex justify-between items-center">
           <Button
-            variant="outline"
+            variant="black"
             onClick={prevStep}
-            // updated: bold green border and text
-            className="border-green-400 text-green-400 hover:bg-green-400 hover:text-black transition-colors"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Previous
