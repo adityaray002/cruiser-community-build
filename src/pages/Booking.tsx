@@ -34,7 +34,26 @@ const Booking = () => {
     if (!selectedCar) setSelectedCar(carTypes[0]);
   }, [selectedCar]);
 
-  const totalSteps = 5;
+  // When service type is 'premium-addons', skip the package step (step 2)
+  const isPremiumAddons = selectedServiceType === "premium-addons";
+  // For premium-addons: step 2 skipped. Show {1- Car, 2- Services, 3- Details, 4- Review} as steps.
+  // totalSteps needs to be reduced by 1 for this path
+  const totalSteps = isPremiumAddons ? 4 : 5;
+
+  // Map step number in UI to step content
+  const getActualStep = (step: number) => {
+    if (isPremiumAddons) {
+      // Steps: 1-Car, 2-Services, 3-Details, 4-Review
+      if (step === 1) return 1; // CarSelection
+      if (step === 2) return 3; // ServiceSelection
+      if (step === 3) return 4; // CustomerDetails
+      if (step === 4) return 5; // BookingSummary
+    } else {
+      // Default: 1-Car, 2-Package, 3-Services, 4-Details, 5-Review
+      return step;
+    }
+    return step;
+  };
 
   const nextStep = () => {
     if (currentStep < totalSteps) {
@@ -51,10 +70,13 @@ const Booking = () => {
   };
 
   const canProceed = () => {
-    switch (currentStep) {
+    // Map to the real step logic
+    const actualStep = getActualStep(currentStep);
+    switch (actualStep) {
       case 1:
         return selectedCar !== "";
       case 2:
+        // Step 2 is only used in non-premium-addons flow
         return selectedPlan !== "";
       case 3:
         return true;
@@ -66,7 +88,8 @@ const Booking = () => {
   };
 
   const renderStep = () => {
-    switch (currentStep) {
+    const actualStep = getActualStep(currentStep);
+    switch (actualStep) {
       case 1:
         return (
           <CarSelection
@@ -75,6 +98,7 @@ const Booking = () => {
           />
         );
       case 2:
+        // Only render for NON-premium-addons flows (step 2 is skipped in premium-addons)
         return (
           <OneTimePricingPlans
             selectedPlan={selectedPlan}
@@ -113,19 +137,41 @@ const Booking = () => {
   };
 
   const getStepTitle = () => {
-    switch (currentStep) {
-      case 1:
-        return "Select Your Car Type";
-      case 2:
-        return `Choose Your ${selectedServiceType === 'waterless' ? 'Waterless' : selectedServiceType === 'premium-addons' ? 'Premium Add-on' : ''} Package`;
-      case 3:
-        return "Additional Services (Optional)";
-      case 4:
-        return "Your Details";
-      case 5:
-        return "Review and Book Now";
-      default:
-        return "";
+    const actualStep = getActualStep(currentStep);
+    if (isPremiumAddons) {
+      switch (actualStep) {
+        case 1:
+          return "Select Your Car Type";
+        case 3:
+          return "Additional Services (Optional)";
+        case 4:
+          return "Your Details";
+        case 5:
+          return "Review and Book Now";
+        default:
+          return "";
+      }
+    } else {
+      switch (currentStep) {
+        case 1:
+          return "Select Your Car Type";
+        case 2:
+          return `Choose Your ${
+            selectedServiceType === "waterless"
+              ? "Waterless"
+              : selectedServiceType === "premium-addons"
+              ? "Premium Add-on"
+              : ""
+          } Package`;
+        case 3:
+          return "Additional Services (Optional)";
+        case 4:
+          return "Your Details";
+        case 5:
+          return "Review and Book Now";
+        default:
+          return "";
+      }
     }
   };
 
