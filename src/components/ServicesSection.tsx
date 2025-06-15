@@ -9,6 +9,7 @@ const ServicesSection = () => {
 
   const services = [
     {
+      id: "one-time",
       icon: "✨",
       title: "One-Time Premium Wash",
       subtitle: "Professional deep cleaning",
@@ -31,6 +32,7 @@ const ServicesSection = () => {
       popular: true
     },
     {
+      id: "waterless",
       icon: "🌿",
       title: "Waterless Eco Cleaning",
       subtitle: "Environment-friendly wash",
@@ -53,6 +55,7 @@ const ServicesSection = () => {
       popular: false
     },
     {
+      id: "premium-addons",
       icon: "💎",
       title: "Premium Add-ons",
       subtitle: "Enhance your car's beauty",
@@ -75,6 +78,7 @@ const ServicesSection = () => {
       popular: false
     },
     {
+      id: "monthly",
       icon: "🏠",
       title: "Monthly Doorstep Service",
       subtitle: "Daily car wash convenience",
@@ -99,7 +103,8 @@ const ServicesSection = () => {
   ];
 
   const handleServiceClick = (service: any) => {
-    // Navigate directly to booking page since we removed service type selection
+    // Store the selected service type in sessionStorage so it can be used in booking
+    sessionStorage.setItem('selectedServiceType', service.id);
     navigate('/booking');
   };
 

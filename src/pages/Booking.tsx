@@ -1,10 +1,9 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
 import CarSelection from "@/components/CarSelection";
-import PricingPlans from "@/components/PricingPlans";
 import OneTimePricingPlans from "@/components/OneTimePricingPlans";
 import ServiceSelection from "@/components/ServiceSelection";
 import TimeSelection from "@/components/TimeSelection";
@@ -13,7 +12,7 @@ import BookingSummary from "@/components/BookingSummary";
 
 const Booking = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [selectedServiceType, setSelectedServiceType] = useState("one-time"); // Default to one-time
+  const [selectedServiceType, setSelectedServiceType] = useState("");
   const [selectedCar, setSelectedCar] = useState("");
   const [selectedPlan, setSelectedPlan] = useState("");
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
@@ -25,7 +24,15 @@ const Booking = () => {
     address: ""
   });
 
-  const totalSteps = 6; // Reduced from 7 since we removed service type selection
+  // Get service type from sessionStorage on component mount
+  useEffect(() => {
+    const serviceType = sessionStorage.getItem('selectedServiceType');
+    if (serviceType) {
+      setSelectedServiceType(serviceType);
+    }
+  }, []);
+
+  const totalSteps = 6;
 
   const nextStep = () => {
     if (currentStep < totalSteps) {
@@ -70,6 +77,7 @@ const Booking = () => {
           <OneTimePricingPlans
             selectedPlan={selectedPlan}
             onPlanSelect={setSelectedPlan}
+            selectedCar={selectedCar}
           />
         );
       case 3:
@@ -96,12 +104,12 @@ const Booking = () => {
       case 6:
         return (
           <BookingSummary
-            serviceType={selectedServiceType}
-            car={selectedCar}
-            plan={selectedPlan}
-            services={selectedServices}
-            time={selectedTime}
-            customerDetails={customerDetails}
+            selectedServiceType={selectedServiceType}
+            selectedCar={selectedCar}
+            selectedPlan={selectedPlan}
+            selectedServices={selectedServices}
+            customerName={customerDetails.name}
+            onEditStep={(step) => setCurrentStep(step)}
           />
         );
       default:
@@ -114,7 +122,7 @@ const Booking = () => {
       case 1:
         return "Select Your Car Type";
       case 2:
-        return "Choose Your Package";
+        return `Choose Your ${selectedServiceType === 'waterless' ? 'Waterless' : selectedServiceType === 'premium-addons' ? 'Premium Add-on' : ''} Package`;
       case 3:
         return "Additional Services (Optional)";
       case 4:
@@ -133,6 +141,20 @@ const Booking = () => {
       <Header onCartOpen={() => {}} />
       
       <div className="container mx-auto px-4 py-8 pt-24">
+        {/* Service Type Indicator */}
+        {selectedServiceType && (
+          <div className="text-center mb-6">
+            <div className="inline-block bg-green-400/10 border border-green-400 rounded-lg px-4 py-2">
+              <span className="text-green-400 font-semibold">
+                {selectedServiceType === 'one-time' && '✨ One-Time Premium Wash'}
+                {selectedServiceType === 'waterless' && '🌿 Waterless Eco Cleaning'}
+                {selectedServiceType === 'premium-addons' && '💎 Premium Add-ons'}
+                {selectedServiceType === 'monthly' && '🏠 Monthly Doorstep Service'}
+              </span>
+            </div>
+          </div>
+        )}
+
         {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
