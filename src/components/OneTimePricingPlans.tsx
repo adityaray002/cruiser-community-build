@@ -127,9 +127,9 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
     // Default one-time packages
     return [
       {
-        name: "exterior wash only",
-        label: "Exterior Wash Only",
-        price: pricing.base,
+        name: "exterior wash + interior wash",
+        label: "Exterior + Interior Wash",
+        price: pricing.premium,
         currency: "₹",
         features: [
           "Foam Wash",
@@ -139,10 +139,25 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
           "Microfibre Cloth",
           "Interior Black Part Polishing",
           "Footmat Clean",
-          "Air Freshener"
+          "Air Freshener",
+        ],
+        highlighted: true,
+        showNote: true,
+      },
+      {
+        name: "exterior wash only",
+        label: "Exterior Wash Only",
+        price: pricing.base,
+        currency: "₹",
+        features: [
+          "Foam Wash",
+          "Tyre Dressing",
+          "Exterior Black Part Polish",
+          "Exterior Body Polish",
+          "Air Freshener",
         ],
         highlighted: false,
-        showNote: true
+        showNote: true,
       },
       {
         name: "interior wash only",
@@ -157,29 +172,11 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
           "Microfibre Cloth",
           "Interior Black Part Polishing",
           "Footmat Clean",
-          "Air Freshener"
+          "Air Freshener",
         ],
         highlighted: false,
-        showNote: true
+        showNote: true,
       },
-      {
-        name: "exterior wash + interior wash",
-        label: "Exterior + Interior Wash",
-        price: pricing.premium,
-        currency: "₹",
-        features: [
-          "Foam Wash",
-          "Tyre Dressing",
-          "Interior Cleaning + Vacuum",
-          "Exterior Black Part Polish",
-          "Microfibre Cloth",
-          "Interior Black Part Polishing",
-          "Footmat Clean",
-          "Air Freshener"
-        ],
-        highlighted: true,
-        showNote: true
-      }
     ];
   };
 
