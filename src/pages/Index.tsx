@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Header from "@/components/Header";
 import Cart from "@/components/Cart";
 import HeroSection from "@/components/HeroSection";
@@ -14,6 +13,16 @@ import SocialIcons from "@/components/SocialIcons";
 
 const Index = () => {
   const [cartOpen, setCartOpen] = useState(false);
+
+  // --- Add ref for PricingPreview section ---
+  const pricingRef = useRef<HTMLDivElement>(null);
+
+  // Handler to scroll to PricingPreview section
+  const handleScrollToPricing = () => {
+    if (pricingRef.current) {
+      pricingRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-black text-white relative h-[755px]" style={{ backgroundColor: "#1E1E1E" }}>
@@ -34,8 +43,12 @@ const Index = () => {
         
         <main>
           <HeroSection />
-          <ServicesSection />
-          <PricingPreview />
+          {/* Pass scroll handler as prop */}
+          <ServicesSection onScrollToPricing={handleScrollToPricing} />
+          {/* Assign ref to PricingPreview wrapper */}
+          <div ref={pricingRef}>
+            <PricingPreview />
+          </div>
           <AboutSection />
           <WhoWeAre/>
           <TestimonialsSection />

@@ -1,10 +1,14 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Clock, MapPin, Star, Shield } from "lucide-react";
 
-const ServicesSection = () => {
+// --- Add prop type for optional scroll-to-pricing handler ---
+interface ServicesSectionProps {
+  onScrollToPricing?: () => void;
+}
+
+const ServicesSection = ({ onScrollToPricing }: ServicesSectionProps) => {
   const navigate = useNavigate();
 
   const services = [
@@ -104,9 +108,14 @@ const ServicesSection = () => {
 
   const handleServiceClick = (service: any) => {
     if (service.id === 'monthly') {
-      // Open WhatsApp for monthly service
+      // Instead of WhatsApp: scroll to PricingPreview section
+      if (typeof onScrollToPricing === "function") {
+        onScrollToPricing();
+        return;
+      }
+      // Fallback: open WhatsApp if handler not provided
       const message = `Hi! I'm interested in your Monthly Doorstep Service. I would like to choose a plan for daily car wash at my doorstep. Please provide me with more details about the available monthly plans.`;
-      const phoneNumber = "919999999999"; // Replace with your actual WhatsApp number
+      const phoneNumber = "919999999999";
       const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, '_blank');
     } else {
