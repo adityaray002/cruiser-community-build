@@ -103,9 +103,17 @@ const ServicesSection = () => {
   ];
 
   const handleServiceClick = (service: any) => {
-    // Store the selected service type in sessionStorage so it can be used in booking
-    sessionStorage.setItem('selectedServiceType', service.id);
-    navigate('/booking');
+    if (service.id === 'monthly') {
+      // Open WhatsApp for monthly service
+      const message = `Hi! I'm interested in your Monthly Doorstep Service. I would like to choose a plan for daily car wash at my doorstep. Please provide me with more details about the available monthly plans.`;
+      const phoneNumber = "919999999999"; // Replace with your actual WhatsApp number
+      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+    } else {
+      // Store the selected service type in sessionStorage so it can be used in booking
+      sessionStorage.setItem('selectedServiceType', service.id);
+      navigate('/booking');
+    }
   };
 
   return (
@@ -191,7 +199,7 @@ const ServicesSection = () => {
                     handleServiceClick(service);
                   }}
                 >
-                  Book Now
+                  {service.id === 'monthly' ? 'Choose Plan' : 'Book Now'}
                 </Button>
               </CardContent>
             </Card>
