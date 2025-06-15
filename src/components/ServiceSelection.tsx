@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Check } from "lucide-react";
@@ -9,7 +8,7 @@ interface ServiceSelectionProps {
   isPremiumAddons?: boolean;
 }
 
-// ==== NEW SERVICE NAMES for Premium Add-ons ====
+// ==== Only use NEW SERVICE NAMES for all flows ====
 const premiumServices = [
   { id: "rubbing", image: "/Rubbing1.jpg", title: "Paint Restoration", description: "Removes scratches and swirl marks for a showroom shine.", price: "₹1299" },
   { id: "3m-wax", image: "/3M1.jpg", title: "Gloss Wax Coat", description: "Deep gloss wax for premium UV protection and shine.", price: "₹399" },
@@ -17,20 +16,9 @@ const premiumServices = [
   { id: "combo-package", image: "/RubbingWaxDryclean.png", title: "Complete Makeover", description: "All-in-one: Paint restoration, wax, and full interior spa.", price: "₹1999" }
 ];
 
-// ==== Original list for non-premium-addons ====
-const standardServices = [
-  { id: "rubbing", image: "/Rubbing1.jpg", title: "Rubbing", description: "Removes light scratches, swirl marks, and restores paint clarity.", price: "₹1299" },
-  { id: "3m-wax", image: "/3M1.jpg", title: "3M Wax", description: "High-gloss protective wax coating for long-lasting shine.", price: "₹399" },
-  { id: "dry-cleaning", image: "/dryclean2.png", title: "Dry Cleaning", description: "Deep vacuuming and interior fabric cleaning for seats and mats.", price: "₹599" },
-  { id: "rubbing-wax", image: "/rubbingwax.png", title: "Rubbing + 3M Wax", description: "Paint correction plus gloss protection in one combo.", price: "₹1499" },
-  { id: "full-package", image: "/RubbingWaxDryclean.png", title: "Rubbing + Wax + Dry Cleaning", description: "Complete exterior and interior rejuvenation package.", price: "₹1999" },
-  { id: "rubbing-dry", image: "/RubbingDryclean1.png", title: "Rubbing + Dry Cleaning", description: "Revives paint finish and refreshes car interiors.", price: "₹1599" },
-  { id: "wax-dry", image: "/WaxDryClean.png", title: "3M Wax + Dry Cleaning", description: "Shiny exterior with spotless and clean interior.", price: "₹999" },
-  { id: "air-freshener", image: "/airfreshner.png", title: "Air Freshener", description: "Keeps your car smelling fresh and inviting after every drive.", price: "₹149" }
-];
-
 const ServiceSelection = ({ selectedServices, onServicesChange, isPremiumAddons }: ServiceSelectionProps) => {
-  const services = isPremiumAddons ? premiumServices : standardServices;
+  // Always use premiumServices for cards, for all flows
+  const services = premiumServices;
 
   const toggleService = (serviceId: string) => {
     if (selectedServices.includes(serviceId)) {
@@ -40,7 +28,7 @@ const ServiceSelection = ({ selectedServices, onServicesChange, isPremiumAddons 
     }
   };
 
-  // --- New name and description for Premium Add-ons ---
+  // Keep headings as per other refinements if desired
   const heading = isPremiumAddons ? "Select Add-on(s)" : "Additional Services";
   const description = isPremiumAddons
     ? "Please select at least one add-on to proceed"
