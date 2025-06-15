@@ -1,4 +1,5 @@
 
+import { useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +7,10 @@ import { Check, Star, Clock } from "lucide-react";
 
 const MonthlyPricing = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const monthlyPlans = [
     { 
