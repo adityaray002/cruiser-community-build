@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Check } from "lucide-react";
@@ -32,19 +33,17 @@ const ServiceSelection = ({ selectedServices, onServicesChange, isPremiumAddons 
     }
   };
 
-  // Set heading (the rest of the UI logic remains the same)
+  // Heading for each flow
   const heading = isPremiumAddons ? "Select Add-on(s)" : "Additional Services";
-  // Remove description for premium add-ons
-  const description = isPremiumAddons
-    ? ""
-    : "Optional - You can skip this step if you don't need additional services";
+  // Description (show only for non-premium-addons)
+  const description = "Optional - You can skip this step if you don't need additional services";
 
   return (
     <div>
       <div className="text-center mb-6">
         <h2 className="text-xl md:text-3xl font-bold text-white mb-2">{heading}</h2>
       </div>
-      
+
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6">
         {services.map((service) => (
           <Card
@@ -80,6 +79,7 @@ const ServiceSelection = ({ selectedServices, onServicesChange, isPremiumAddons 
         ))}
       </div>
 
+      {/* Show description only for non-premium-addons */}
       {!isPremiumAddons && (
         <div className="text-center">
           <p className="font-semibold text-sm md:text-base text-green-400">{description}</p>
