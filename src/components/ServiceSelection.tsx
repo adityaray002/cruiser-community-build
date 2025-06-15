@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Check } from "lucide-react";
@@ -40,10 +39,11 @@ const ServiceSelection = ({ selectedServices, onServicesChange, isPremiumAddons 
     }
   };
 
-  // --- New name and description for Premium Add-ons ---
+  // --- Set heading and description ---
   const heading = isPremiumAddons ? "Select Add-on(s)" : "Additional Services";
+  // Remove bottom description for premium add-ons (as per your request)
   const description = isPremiumAddons
-    ? "Please select at least one add-on to proceed"
+    ? ""
     : "Optional - You can skip this step if you don't need additional services";
 
   return (
@@ -87,11 +87,11 @@ const ServiceSelection = ({ selectedServices, onServicesChange, isPremiumAddons 
         ))}
       </div>
 
-      <div className={`text-center`}>
-        <p className={`font-semibold text-sm md:text-base ${isPremiumAddons ? "text-red-400" : "text-green-400"}`}>
-          {description}
-        </p>
-      </div>
+      {!isPremiumAddons && (
+        <div className="text-center">
+          <p className="font-semibold text-sm md:text-base text-green-400">{description}</p>
+        </div>
+      )}
     </div>
   );
 };
