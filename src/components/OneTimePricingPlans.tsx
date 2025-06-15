@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -128,6 +127,42 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
     // Default one-time packages
     return [
       {
+        name: "exterior wash only",
+        label: "Exterior Wash Only",
+        price: pricing.base,
+        currency: "₹",
+        features: [
+          "Foam Wash",
+          "Tyre Dressing",
+          "Interior Cleaning + Vacuum",
+          "Exterior Black Part Polish",
+          "Microfibre Cloth",
+          "Interior Black Part Polishing",
+          "Footmat Clean",
+          "Air Freshener"
+        ],
+        highlighted: false,
+        showNote: true
+      },
+      {
+        name: "interior wash only",
+        label: "Interior Deep Clean",
+        price: pricing.base - 100,
+        currency: "₹",
+        features: [
+          "Foam Wash",
+          "Tyre Dressing",
+          "Interior Cleaning + Vacuum",
+          "Exterior Black Part Polish",
+          "Microfibre Cloth",
+          "Interior Black Part Polishing",
+          "Footmat Clean",
+          "Air Freshener"
+        ],
+        highlighted: false,
+        showNote: true
+      },
+      {
         name: "exterior wash + interior wash",
         label: "Exterior + Interior Wash",
         price: pricing.premium,
@@ -144,34 +179,6 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
         ],
         highlighted: true,
         showNote: true
-      },
-      {
-        name: "exterior wash only",
-        label: "Exterior Wash Only",
-        price: pricing.base,
-        currency: "₹",
-        features: [
-          "Foam Wash",
-          "Tyre Dressing",
-          "Exterior Black Part Polish",
-          "Microfibre Cloth"
-        ],
-        highlighted: false,
-        showNote: true
-      },
-      {
-        name: "interior wash only",
-        label: "Interior Deep Clean",
-        price: pricing.base - 100,
-        currency: "₹",
-        features: [
-          "Interior Cleaning + Vacuum",
-          "Interior Black Part Polishing",
-          "Footmat Clean",
-          "Air Freshener"
-        ],
-        highlighted: false,
-        showNote: false
       }
     ];
   };
