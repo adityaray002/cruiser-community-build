@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -81,8 +80,17 @@ const PricingPreview = () => {
     }
   ];
 
+  // --- New handler for WhatsApp for monthly plans ---
+  const handleMonthlyPlanWhatsapp = (plan: any) => {
+    const message = `Hi! I'm interested in the Monthly Doorstep Service (${plan.name} - ₹${plan.price}/mo). Please share the details and next steps.`;
+    const phoneNumber = "918920230357";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   const handleMonthlyPlanClick = (plan: any) => {
-    navigate(`/booking?service=monthly&car=${plan.name.toLowerCase()}`);
+    // Old: navigate(`/booking?service=monthly&car=${plan.name.toLowerCase()}`);
+    handleMonthlyPlanWhatsapp(plan);
   };
 
   const handleOneTimePlanClick = (plan: any) => {
@@ -122,7 +130,7 @@ const PricingPreview = () => {
                   transform hover:scale-105 hover:shadow-xl hover:shadow-green-400/20 relative group
                   ${plan.popular ? 'ring-2 ring-green-400' : ''}
                 `}
-                onClick={() => handleMonthlyPlanClick(plan)}
+                // Removed card-level onClick to avoid accidental WhatsApp open
               >
                 {plan.popular && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
