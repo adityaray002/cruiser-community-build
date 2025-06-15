@@ -47,7 +47,7 @@ const ServiceDetails = ({
           <h3 className="text-lg font-extrabold text-green-400 tracking-tight">
             {title}
           </h3>
-          <span className="ml-auto px-2 py-0 rounded-full bg-gray-800 text-white text-xs font-bold tracking-wide shadow-sm border border-green-400">
+          <span className="ml-auto px-3 py-1 rounded-full bg-white text-black text-lg font-bold tracking-wide shadow-sm border-2 border-green-400">
             {price}
           </span>
         </div>
@@ -61,7 +61,7 @@ const ServiceDetails = ({
 
         <div className="mb-2">
           <label className="block text-xs font-bold text-gray-400 mb-0.5">
-            What's included / Who is this for?
+            What's included / Good for whom?
           </label>
           <p className="text-gray-300 text-xs leading-tight">{details}</p>
         </div>
@@ -83,4 +83,3 @@ const ServiceDetails = ({
 };
 
 export default ServiceDetails;
-
