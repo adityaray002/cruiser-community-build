@@ -186,44 +186,6 @@ const PricingPreview = () => {
             ))}
           </div>
         </div>
-
-        {/* Additional Services Preview */}
-        <div className="bg-gray-800 rounded-lg p-8 text-center">
-          <h3 className="text-xl font-bold text-white mb-4">Premium Add-on Services</h3>
-          <p className="text-gray-300 mb-6">Enhance your car with our professional detailing services</p>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-            <div className="text-center p-3 bg-gray-700 rounded-lg">
-              <div className="text-green-400 font-bold text-lg">₹1299</div>
-              <div className="text-gray-300 text-sm">Paint Rubbing</div>
-            </div>
-            <div className="text-center p-3 bg-gray-700 rounded-lg">
-              <div className="text-green-400 font-bold text-lg">₹399</div>
-              <div className="text-gray-300 text-sm">3M Wax</div>
-            </div>
-            <div className="text-center p-3 bg-gray-700 rounded-lg">
-              <div className="text-green-400 font-bold text-lg">₹599</div>
-              <div className="text-gray-300 text-sm">Dry Cleaning</div>
-            </div>
-            <div className="text-center p-3 bg-gray-700 rounded-lg">
-              <div className="text-green-400 font-bold text-lg">₹1999</div>
-              <div className="text-gray-300 text-sm">Full Package</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="text-center mt-12">
-          <Button 
-            size="lg"
-            className="bg-green-400 hover:bg-green-500 text-black font-semibold px-12 py-4 text-xl"
-            onClick={() => navigate('/booking')}
-          >
-            Book Your Service Now
-          </Button>
-          <p className="text-gray-400 text-sm mt-4">
-            🕐 Quick booking • 🏠 Same day service • ⭐ Professional quality • 🔒 100% safe
-          </p>
-        </div>
       </div>
     </section>
   );

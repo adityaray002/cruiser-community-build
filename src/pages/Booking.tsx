@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowLeft } from "lucide-react";
@@ -12,8 +11,10 @@ import BookingSummary from "@/components/BookingSummary";
 
 const Booking = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const carTypes = ["Sedan", "SUV", "Hatchback", "Luxury"];
+  // Default selectedCar to first car type
+  const [selectedCar, setSelectedCar] = useState(carTypes[0]);
   const [selectedServiceType, setSelectedServiceType] = useState("");
-  const [selectedCar, setSelectedCar] = useState("");
   const [selectedPlan, setSelectedPlan] = useState("");
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [selectedTime, setSelectedTime] = useState("");
@@ -31,6 +32,11 @@ const Booking = () => {
       setSelectedServiceType(serviceType);
     }
   }, []);
+
+  // If selectedCar is empty after first render, fix it
+  useEffect(() => {
+    if (!selectedCar) setSelectedCar(carTypes[0]);
+  }, [selectedCar]);
 
   const totalSteps = 6;
 
