@@ -137,6 +137,8 @@ const Booking = () => {
 
   // Final step: Open WhatsApp with pre-filled message
   const handleBookNow = () => {
+    console.log("Book Now button clicked");
+
     const phone = "918920230357";
     let message = `Hello! I would like to book a car wash service.%0A`;
     message += `Name: ${customerDetails.name}%0A`;
@@ -147,6 +149,7 @@ const Booking = () => {
       message += `Add-ons: ${selectedServices.join(", ")}%0A`;
     }
     const whatsappUrl = `https://wa.me/${phone}?text=${message}`;
+    console.log("Opening WhatsApp URL:", whatsappUrl);
     window.open(whatsappUrl, "_blank");
   };
 
