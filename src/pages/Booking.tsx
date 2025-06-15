@@ -1,4 +1,6 @@
+
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
@@ -12,19 +14,16 @@ import BookingSummary from "@/components/BookingSummary";
 const Booking = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const carTypes = ["Sedan", "SUV", "Hatchback", "Luxury"];
-  // Default selectedCar to first car type
   const [selectedCar, setSelectedCar] = useState(carTypes[0]);
   const [selectedServiceType, setSelectedServiceType] = useState("");
   const [selectedPlan, setSelectedPlan] = useState("");
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
-  // Removed selectedTime state
-
-  // Update customerDetails to only include 'name'
   const [customerDetails, setCustomerDetails] = useState({
     name: "",
   });
 
-  // Get service type from sessionStorage on component mount
+  const navigate = useNavigate();
+
   useEffect(() => {
     const serviceType = sessionStorage.getItem('selectedServiceType');
     if (serviceType) {
@@ -32,12 +31,10 @@ const Booking = () => {
     }
   }, []);
 
-  // If selectedCar is empty after first render, fix it
   useEffect(() => {
     if (!selectedCar) setSelectedCar(carTypes[0]);
   }, [selectedCar]);
 
-  // New: total steps is now 5 (remove Date & Time)
   const totalSteps = 5;
 
   const nextStep = () => {
@@ -47,7 +44,9 @@ const Booking = () => {
   };
 
   const prevStep = () => {
-    if (currentStep > 1) {
+    if (currentStep === 1) {
+      navigate("/");
+    } else if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
   };
@@ -59,10 +58,9 @@ const Booking = () => {
       case 2:
         return selectedPlan !== "";
       case 3:
-        return true; // Optional services
-      // Skip step 4: was Date & Time
+        return true;
       case 4:
-        return customerDetails.name; // Only require name
+        return customerDetails.name;
       default:
         return false;
     }
@@ -92,9 +90,7 @@ const Booking = () => {
             onServicesChange={setSelectedServices}
           />
         );
-      // REMOVED Date & Time selection step
       case 4:
-        // This is now the CustomerDetails step (was step 5)
         return (
           <CustomerDetails
             customerDetails={customerDetails}
@@ -125,7 +121,6 @@ const Booking = () => {
         return `Choose Your ${selectedServiceType === 'waterless' ? 'Waterless' : selectedServiceType === 'premium-addons' ? 'Premium Add-on' : ''} Package`;
       case 3:
         return "Additional Services (Optional)";
-      // case 4: now Your Details
       case 4:
         return "Your Details";
       case 5:
@@ -135,7 +130,6 @@ const Booking = () => {
     }
   };
 
-  // Final step: Open WhatsApp with pre-filled message
   const handleBookNow = () => {
     console.log("Book Now button clicked");
 
@@ -199,7 +193,7 @@ const Booking = () => {
           <Button
             variant="outline"
             onClick={prevStep}
-            disabled={currentStep === 1}
+            // enabled always (even on step 1)
             className="border-gray-600 text-gray-300 hover:bg-gray-700"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -230,3 +224,4 @@ const Booking = () => {
 };
 
 export default Booking;
+
