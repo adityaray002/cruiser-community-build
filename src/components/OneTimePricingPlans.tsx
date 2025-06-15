@@ -168,8 +168,6 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
         price: pricing.base - 100,
         currency: "₹",
         features: [
-          "Foam Wash",
-          "Tyre Dressing",
           "Interior Cleaning + Vacuum",
           "Microfibre Cloth",
           "Interior Black Part Polishing",
