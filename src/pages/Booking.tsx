@@ -196,7 +196,8 @@ const Booking = () => {
     <div className="min-h-screen bg-black text-white relative">
       <Header onCartOpen={() => {}} />
 
-      {/* Floating contact button for easy call */}
+      {/* Removed: Floating contact button for easy call */}
+      {/* 
       <a
         href="tel:8920230357"
         className="fixed bottom-6 right-6 z-50 bg-green-400 hover:bg-green-500 shadow-lg rounded-full p-4 flex items-center transition-transform active:scale-95"
@@ -207,9 +208,10 @@ const Booking = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h2.28c.31 0 .61.15.8.4l1.54 2.08a2.004 2.004 0 01-.18 2.53l-.71.71a16.001 16.001 0 006.59 6.59l.71-.71a2.004 2.004 0 012.53-.18l2.08 1.54c.25.19.39.49.39.8V19a2 2 0 01-2 2h-1C7.373 21 3 16.627 3 11V5z" />
         </svg>
       </a>
-
+      */}
       <div className="container mx-auto px-4 py-8 pt-24">
-        {/* Easy-to-find contact above booking steps */}
+        {/* Removed: Easy-to-find contact above booking steps */}
+        {/* 
         <div className="flex justify-end mb-4">
           <a
             href="tel:8920230357"
@@ -221,6 +223,7 @@ const Booking = () => {
             <span>Call: +91 89202 30357</span>
           </a>
         </div>
+        */}
         {/* Service Type Indicator */}
         {selectedServiceType && (
           <div className="text-center mb-6">
