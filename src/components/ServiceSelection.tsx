@@ -6,81 +6,287 @@ interface ServiceSelectionProps {
   selectedServices: string[];
   onServicesChange: (services: string[]) => void;
   isPremiumAddons?: boolean;
+  selectedCar?: string;
 }
 
-const standardServices = [
-  {
-    id: "rubbing",
-    image: "/Rubbing1.jpg",
-    title: "Rubbing",
-    description: "Removes light scratches, swirl marks, and restores paint clarity.",
-    price: "₹1299",
-    details: "Ideal for dull or mildly scratched paint. Includes exterior cleaning."
-  },
-  {
-    id: "3m-wax",
-    image: "/3M1.jpg",
-    title: "3M Wax",
-    description: "High-gloss protective wax coating for long-lasting shine.",
-    price: "₹299",
-    details: "Best applied after washing or rubbing. Lasts up to 2 months."
-  },
-  {
-    id: "dry-cleaning",
-    image: "/dryclean2.png",
-    title: "Dry Cleaning",
-    description: "Deep vacuuming and interior fabric cleaning for seats and mats.",
-    price: "₹999",
-    details: "Targets stains and odours. Suitable for cloth and synthetic seats."
-  },
-  {
-    id: "rubbing-wax",
-    image: "/rubbingwax.png",
-    title: "Rubbing + 3M Wax",
-    description: "Paint correction plus gloss protection in one combo.",
-    price: "₹1499",
-    details: "Saves money vs. individual services. Popular maintenance combo."
-  },
-  {
-    id: "full-package",
-    image: "/RubbingWaxDryclean.png",
-    title: "Rubbing + Wax + Dry Cleaning",
-    description: "Complete exterior and interior rejuvenation package.",
-    price: "₹2299",
-    details: "Best value! Covers paint, wax, and full interior clean."
-  },
-  {
-    id: "rubbing-dry",
-    image: "/RubbingDryclean1.png",
-    title: "Rubbing + Dry Cleaning",
-    description: "Revives paint finish and refreshes car interiors.",
-    price: "₹1599",
-    details: "Great for busy families or post-road-trip refreshment."
-  },
-  {
-    id: "wax-dry",
-    image: "/WaxDryClean.png",
-    title: "Dry Cleaning + 3M Wax",
-    description: "Shiny exterior with spotless and clean interior.",
-    price: "₹1299",
-    details: "Economical choice for regular car upkeep."
-  },
-  {
-    id: "air-freshener",
-    image: "/airfreshner.png",
-    title: "Air Freshener",
-    description: "Keeps your car smelling fresh and inviting after every drive.",
-    price: "₹149",
-    details: "Scents may vary. Long-lasting fragrance."
-  }
-];
+const getServicesForCarType = (carType: string) => {
+  const baseServices = {
+    "hatchback": [
+      {
+        id: "rubbing-foam-hatchback",
+        image: "/Rubbing1.jpg",
+        title: "Rubbing + Exterior Foam Wash",
+        description: "A deep cleaning and polish that removes dullness, scratches, and oxidation from your car's paint. Followed by a thick foam wash that gives a shiny, fresh look.",
+        price: "₹1599",
+        details: "Paint surface rubbing (polishing), Thick foam exterior wash. Good for cars with light scratches, dull paint, or that need a shine restoration."
+      },
+      {
+        id: "3m-wax-foam-hatchback",
+        image: "/3M1.jpg",
+        title: "3M Wax + Exterior Foam Wash",
+        description: "A high-quality wax polish by 3M for paint protection and shine, combined with a professional foam wash.",
+        price: "₹649",
+        details: "3M Wax Polish, Exterior foam wash. Perfect for regular maintenance and shine boost."
+      },
+      {
+        id: "rubbing-wax-foam-hatchback",
+        image: "/rubbingwax.png",
+        title: "Rubbing + 3M Wax + Exterior Foam Wash",
+        description: "A complete exterior treatment with rubbing, wax, and foam wash.",
+        price: "₹1699",
+        details: "Surface rubbing/polish, 3M wax coating, Foam wash. Great for scratch removal and shine."
+      },
+      {
+        id: "full-package-hatchback",
+        image: "/RubbingWaxDryclean.png",
+        title: "Rubbing + 3M Wax + Dry Cleaning + Exterior Foam Wash",
+        description: "Complete car care – inside and out.",
+        price: "₹2499",
+        details: "Rubbing polish, 3M wax, Interior dry cleaning (seats, mats, roof, dashboard), Foam wash. Ideal for full car makeover."
+      },
+      {
+        id: "rubbing-dry-foam-hatchback",
+        image: "/RubbingDryclean1.png",
+        title: "Rubbing + Dry Cleaning + Exterior Foam Wash",
+        description: "Exterior polish + full interior dry cleaning.",
+        price: "₹2199",
+        details: "Rubbing, Interior dry clean, Foam wash. For fresh, clean car experience."
+      },
+      {
+        id: "dry-wax-foam-hatchback",
+        image: "/WaxDryClean.png",
+        title: "Dry Cleaning + 3M Wax + Exterior Foam Wash",
+        description: "Balanced inside-out care.",
+        price: "₹1499",
+        details: "Interior dry clean, 3M wax, Foam wash. Best for regular upkeep."
+      },
+      {
+        id: "dry-cleaning-hatchback",
+        image: "/dryclean2.png",
+        title: "Dry Cleaning",
+        description: "Deep interior cleaning for seats, mats, roof, and dashboard.",
+        price: "₹999",
+        details: "Complete interior dry cleaning service for a fresh cabin experience."
+      },
+      {
+        id: "air-freshener-hatchback",
+        image: "/airfreshner.png",
+        title: "Air Freshener",
+        description: "Keeps your car smelling fresh and inviting after every drive.",
+        price: "₹149",
+        details: "Long-lasting fragrance for a pleasant driving experience."
+      }
+    ],
+    "sedan": [
+      {
+        id: "rubbing-foam-sedan",
+        image: "/Rubbing1.jpg",
+        title: "Rubbing + Exterior Foam Wash",
+        description: "A deep cleaning and polish that removes dullness, scratches, and oxidation from your car's paint. Followed by a thick foam wash that gives a shiny, fresh look.",
+        price: "₹1599",
+        details: "Paint surface rubbing (polishing), Thick foam exterior wash. Good for cars with light scratches, dull paint, or that need a shine restoration."
+      },
+      {
+        id: "3m-wax-foam-sedan",
+        image: "/3M1.jpg",
+        title: "3M Wax + Exterior Foam Wash",
+        description: "A high-quality wax polish by 3M for paint protection and shine, combined with a professional foam wash.",
+        price: "₹649",
+        details: "3M Wax Polish, Exterior foam wash. Perfect for regular maintenance and shine boost."
+      },
+      {
+        id: "rubbing-wax-foam-sedan",
+        image: "/rubbingwax.png",
+        title: "Rubbing + 3M Wax + Exterior Foam Wash",
+        description: "A complete exterior treatment with rubbing, wax, and foam wash.",
+        price: "₹1699",
+        details: "Surface rubbing/polish, 3M wax coating, Foam wash. Great for scratch removal and shine."
+      },
+      {
+        id: "full-package-sedan",
+        image: "/RubbingWaxDryclean.png",
+        title: "Rubbing + 3M Wax + Dry Cleaning + Exterior Foam Wash",
+        description: "Complete car care – inside and out.",
+        price: "₹2499",
+        details: "Rubbing polish, 3M wax, Interior dry cleaning (seats, mats, roof, dashboard), Foam wash. Ideal for full car makeover."
+      },
+      {
+        id: "rubbing-dry-foam-sedan",
+        image: "/RubbingDryclean1.png",
+        title: "Rubbing + Dry Cleaning + Exterior Foam Wash",
+        description: "Exterior polish + full interior dry cleaning.",
+        price: "₹2199",
+        details: "Rubbing, Interior dry clean, Foam wash. For fresh, clean car experience."
+      },
+      {
+        id: "dry-wax-foam-sedan",
+        image: "/WaxDryClean.png",
+        title: "Dry Cleaning + 3M Wax + Exterior Foam Wash",
+        description: "Balanced inside-out care.",
+        price: "₹1499",
+        details: "Interior dry clean, 3M wax, Foam wash. Best for regular upkeep."
+      },
+      {
+        id: "dry-cleaning-sedan",
+        image: "/dryclean2.png",
+        title: "Dry Cleaning",
+        description: "Deep interior cleaning for seats, mats, roof, and dashboard.",
+        price: "₹999",
+        details: "Complete interior dry cleaning service for a fresh cabin experience."
+      },
+      {
+        id: "air-freshener-sedan",
+        image: "/airfreshner.png",
+        title: "Air Freshener",
+        description: "Keeps your car smelling fresh and inviting after every drive.",
+        price: "₹149",
+        details: "Long-lasting fragrance for a pleasant driving experience."
+      }
+    ],
+    "suv": [
+      {
+        id: "rubbing-foam-suv",
+        image: "/Rubbing1.jpg",
+        title: "Rubbing + Exterior Foam Wash",
+        description: "A deep cleaning and polish that removes dullness, scratches, and oxidation from your car's paint. Followed by a thick foam wash that gives a shiny, fresh look.",
+        price: "₹1799",
+        details: "Paint surface rubbing (polishing), Thick foam exterior wash. Good for cars with light scratches, dull paint, or that need a shine restoration."
+      },
+      {
+        id: "3m-wax-foam-suv",
+        image: "/3M1.jpg",
+        title: "3M Wax + Exterior Foam Wash",
+        description: "A high-quality wax polish by 3M for paint protection and shine, combined with a professional foam wash.",
+        price: "₹749",
+        details: "3M Wax Polish, Exterior foam wash. Perfect for regular maintenance and shine boost."
+      },
+      {
+        id: "rubbing-wax-foam-suv",
+        image: "/rubbingwax.png",
+        title: "Rubbing + 3M Wax + Exterior Foam Wash",
+        description: "A complete exterior treatment with rubbing, wax, and foam wash.",
+        price: "₹1899",
+        details: "Surface rubbing/polish, 3M wax coating, Foam wash. Great for scratch removal and shine."
+      },
+      {
+        id: "full-package-suv",
+        image: "/RubbingWaxDryclean.png",
+        title: "Rubbing + 3M Wax + Dry Cleaning + Exterior Foam Wash",
+        description: "Complete car care – inside and out.",
+        price: "₹2699",
+        details: "Rubbing polish, 3M wax, Interior dry cleaning (seats, mats, roof, dashboard), Foam wash. Ideal for full car makeover."
+      },
+      {
+        id: "rubbing-dry-foam-suv",
+        image: "/RubbingDryclean1.png",
+        title: "Rubbing + Dry Cleaning + Exterior Foam Wash",
+        description: "Exterior polish + full interior dry cleaning.",
+        price: "₹2399",
+        details: "Rubbing, Interior dry clean, Foam wash. For fresh, clean car experience."
+      },
+      {
+        id: "dry-wax-foam-suv",
+        image: "/WaxDryClean.png",
+        title: "Dry Cleaning + 3M Wax + Exterior Foam Wash",
+        description: "Balanced inside-out care.",
+        price: "₹1699",
+        details: "Interior dry clean, 3M wax, Foam wash. Best for regular upkeep."
+      },
+      {
+        id: "dry-cleaning-suv",
+        image: "/dryclean2.png",
+        title: "Dry Cleaning",
+        description: "Deep interior cleaning for seats, mats, roof, and dashboard.",
+        price: "₹1099",
+        details: "Complete interior dry cleaning service for a fresh cabin experience."
+      },
+      {
+        id: "air-freshener-suv",
+        image: "/airfreshner.png",
+        title: "Air Freshener",
+        description: "Keeps your car smelling fresh and inviting after every drive.",
+        price: "₹149",
+        details: "Long-lasting fragrance for a pleasant driving experience."
+      }
+    ],
+    "luxury": [
+      {
+        id: "rubbing-foam-luxury",
+        image: "/Rubbing1.jpg",
+        title: "Rubbing + Exterior Foam Wash",
+        description: "A deep cleaning and polish that removes dullness, scratches, and oxidation from your car's paint. Followed by a thick foam wash that gives a shiny, fresh look.",
+        price: "₹1899",
+        details: "Paint surface rubbing (polishing), Thick foam exterior wash. Good for cars with light scratches, dull paint, or that need a shine restoration."
+      },
+      {
+        id: "3m-wax-foam-luxury",
+        image: "/3M1.jpg",
+        title: "3M Wax + Exterior Foam Wash",
+        description: "A high-quality wax polish by 3M for paint protection and shine, combined with a professional foam wash.",
+        price: "₹949",
+        details: "3M Wax Polish, Exterior foam wash. Perfect for regular maintenance and shine boost."
+      },
+      {
+        id: "rubbing-wax-foam-luxury",
+        image: "/rubbingwax.png",
+        title: "Rubbing + 3M Wax + Exterior Foam Wash",
+        description: "A complete exterior treatment with rubbing, wax, and foam wash.",
+        price: "₹1999",
+        details: "Surface rubbing/polish, 3M wax coating, Foam wash. Great for scratch removal and shine."
+      },
+      {
+        id: "full-package-luxury",
+        image: "/RubbingWaxDryclean.png",
+        title: "Rubbing + 3M Wax + Dry Cleaning + Exterior Foam Wash",
+        description: "Complete car care – inside and out.",
+        price: "₹2799",
+        details: "Rubbing polish, 3M wax, Interior dry cleaning (seats, mats, roof, dashboard), Foam wash. Ideal for full car makeover."
+      },
+      {
+        id: "rubbing-dry-foam-luxury",
+        image: "/RubbingDryclean1.png",
+        title: "Rubbing + Dry Cleaning + Exterior Foam Wash",
+        description: "Exterior polish + full interior dry cleaning.",
+        price: "₹2499",
+        details: "Rubbing, Interior dry clean, Foam wash. For fresh, clean car experience."
+      },
+      {
+        id: "dry-wax-foam-luxury",
+        image: "/WaxDryClean.png",
+        title: "Dry Cleaning + 3M Wax + Exterior Foam Wash",
+        description: "Balanced inside-out care.",
+        price: "₹1799",
+        details: "Interior dry clean, 3M wax, Foam wash. Best for regular upkeep."
+      },
+      {
+        id: "dry-cleaning-luxury",
+        image: "/dryclean2.png",
+        title: "Dry Cleaning",
+        description: "Deep interior cleaning for seats, mats, roof, and dashboard.",
+        price: "₹1099",
+        details: "Complete interior dry cleaning service for a fresh cabin experience."
+      },
+      {
+        id: "air-freshener-luxury",
+        image: "/airfreshner.png",
+        title: "Air Freshener",
+        description: "Keeps your car smelling fresh and inviting after every drive.",
+        price: "₹149",
+        details: "Long-lasting fragrance for a pleasant driving experience."
+      }
+    ]
+  };
+
+  return baseServices[carType.toLowerCase() as keyof typeof baseServices] || baseServices.sedan;
+};
 
 const ServiceSelection = ({
   selectedServices,
   onServicesChange,
   isPremiumAddons,
+  selectedCar = "sedan"
 }: ServiceSelectionProps) => {
-  const services = standardServices;
+  const services = getServicesForCarType(selectedCar);
 
   const toggleService = (serviceId: string) => {
     if (selectedServices.includes(serviceId)) {

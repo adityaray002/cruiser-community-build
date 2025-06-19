@@ -106,15 +106,11 @@ const MonthlyPricing = () => {
                 <div className="text-xs text-gray-300 space-y-1 mb-4">
                   <div className="flex items-center justify-center">
                     <Check className="h-3 w-3 text-green-400 mr-1" />
-                    26 Days Cleaning
+                    26 Days Exterior Cleaning
                   </div>
                   <div className="flex items-center justify-center">
                     <Check className="h-3 w-3 text-green-400 mr-1" />
-                    1 Foam Wash
-                  </div>
-                  <div className="flex items-center justify-center">
-                    <Check className="h-3 w-3 text-green-400 mr-1" />
-                    Interior Cleaning
+                    1 Foam Wash + Interior Cleaning
                   </div>
                   <div className="flex items-center justify-center">
                     <Check className="h-3 w-3 text-green-400 mr-1" />
@@ -134,7 +130,7 @@ const MonthlyPricing = () => {
         <div className="text-center mt-12">
           <Button 
             variant="outline"
-            className="border-gray-500 text-gray-400 hover:bg-gray-800"
+            className="border-green-400 text-green-400 hover:bg-green-400 hover:text-black"
             onClick={() => navigate("/")}
           >
             Back to Home

@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -18,111 +19,15 @@ const OneTimePricingPlans = ({ selectedPlan, onPlanSelect, selectedCar }: Pricin
   }, []);
 
   const getPlansForCar = (carType: string, serviceType: string) => {
-    // Base pricing for different car types
+    // Base pricing for different car types (subtract ₹1 from all prices)
     const basePricing = {
-      "Sedan": { base: 400, premium: 600 },
-      "SUV": { base: 500, premium: 700 },
-      "Hatchback": { base: 350, premium: 500 },
-      "Luxury": { base: 500, premium: 700 }
+      "Sedan": { base: 399, premium: 599 },
+      "SUV": { base: 499, premium: 699 },
+      "Hatchback": { base: 349, premium: 499 },
+      "Luxury": { base: 499, premium: 699 }
     };
 
     const pricing = basePricing[carType as keyof typeof basePricing] || basePricing["Sedan"];
-
-    if (serviceType === "waterless") {
-      return [
-        {
-          name: "waterless basic",
-          label: "Waterless Basic",
-          price: pricing.base - 50,
-          currency: "₹",
-          features: [
-            "Exterior Shampooing",
-            "Exterior Polish",
-            "Tyre Dressing",
-            "Microfibre Cloth"
-          ],
-          highlighted: false,
-          showNote: false
-        },
-        {
-          name: "waterless premium",
-          label: "Waterless Premium",
-          price: pricing.base,
-          currency: "₹",
-          features: [
-            "Exterior Shampooing",
-            "Exterior Polish",
-            "Tyre Dressing",
-            "Exterior Black Part Polish",
-            "Microfibre Cloth",
-            "Air Freshener"
-          ],
-          highlighted: true,
-          showNote: false
-        }
-      ];
-    }
-
-    if (serviceType === "premium-addons") {
-      return [
-        {
-          name: "rubbing",
-          label: "Paint Rubbing",
-          price: 1299,
-          currency: "₹",
-          features: [
-            "Paint Correction",
-            "Removes Light Scratches",
-            "Swirl Mark Removal",
-            "Professional Tools"
-          ],
-          highlighted: false,
-          showNote: true
-        },
-        {
-          name: "3m-wax",
-          label: "3M Premium Wax",
-          price: 399,
-          currency: "₹",
-          features: [
-            "High-Gloss Protection",
-            "UV Protection",
-            "Water Repellent",
-            "Long-lasting Shine"
-          ],
-          highlighted: false,
-          showNote: true
-        },
-        {
-          name: "dry-cleaning",
-          label: "Interior Dry Clean",
-          price: 599,
-          currency: "₹",
-          features: [
-            "Deep Vacuum",
-            "Fabric Cleaning",
-            "Seat Shampooing",
-            "Floor Mat Cleaning"
-          ],
-          highlighted: false,
-          showNote: true
-        },
-        {
-          name: "combo-package",
-          label: "Complete Combo",
-          price: 1999,
-          currency: "₹",
-          features: [
-            "Paint Rubbing",
-            "3M Wax Application",
-            "Interior Dry Clean",
-            "Complete Detailing"
-          ],
-          highlighted: true,
-          showNote: true
-        }
-      ];
-    }
 
     // Default one-time packages
     return [

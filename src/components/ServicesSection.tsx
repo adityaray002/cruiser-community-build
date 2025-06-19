@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -36,37 +37,14 @@ const ServicesSection = ({ onScrollToPricing }: ServicesSectionProps) => {
       popular: true
     },
     {
-      id: "waterless",
-      icon: "🌿",
-      title: "Waterless Eco Cleaning",
-      subtitle: "Environment-friendly wash",
-      description: "Eco-friendly waterless car cleaning that's gentle on your car and the environment. Perfect for water-scarce areas.",
-      priceRange: "₹349 - ₹399",
-      originalPrice: "₹500",
-      savings: "Save ₹101+",
-      features: [
-        "No Water Required",
-        "Eco-Friendly Products",
-        "Paint Safe Formula",
-        "Quick 30-min Service",
-        "Shine & Protection"
-      ],
-      highlights: [
-        { icon: Clock, text: "30 minutes only" },
-        { icon: Shield, text: "Paint protection" },
-        { icon: MapPin, text: "Any location" }
-      ],
-      popular: false
-    },
-    {
       id: "premium-addons",
       icon: "💎",
       title: "Premium Add-ons",
       subtitle: "Enhance your car's beauty",
       description: "Professional detailing services including paint rubbing, waxing, and interior dry cleaning for the ultimate car care experience.",
-      priceRange: "₹149 - ₹1999",
-      originalPrice: "₹2500",
-      savings: "Save ₹501+",
+      priceRange: "₹149 - ₹2799",
+      originalPrice: "₹3000",
+      savings: "Save ₹201+",
       features: [
         "Paint Rubbing & Polishing",
         "3M Premium Wax",
@@ -92,7 +70,7 @@ const ServicesSection = ({ onScrollToPricing }: ServicesSectionProps) => {
       savings: "Save ₹301+",
       features: [
         "26 Days Exterior Cleaning",
-        "1 Foam Wash + Interior",
+        "1 Foam Wash + Interior Cleaning",
         "Tire Cleaning & Dressing",
         "At Your Doorstep Daily",
         "Eco-friendly Products"
@@ -117,7 +95,7 @@ const ServicesSection = ({ onScrollToPricing }: ServicesSectionProps) => {
   };
 
   return (
-    <section className="py-12 md:py-20 px-4 md:px-6 bg-black">
+    <section id="services" className="py-12 md:py-20 px-4 md:px-6 bg-black">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -129,7 +107,7 @@ const ServicesSection = ({ onScrollToPricing }: ServicesSectionProps) => {
           <div className="w-20 h-1 bg-green-400 mx-auto"></div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {services.map((service, index) => (
             <Card 
               key={index} 
@@ -199,7 +177,7 @@ const ServicesSection = ({ onScrollToPricing }: ServicesSectionProps) => {
                     handleServiceClick(service);
                   }}
                 >
-                  Choose Plan
+                  Check Prices
                 </Button>
               </CardContent>
             </Card>

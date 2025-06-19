@@ -12,7 +12,7 @@ import BookingSummary from "@/components/BookingSummary";
 
 const Booking = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const carTypes = ["Sedan", "SUV", "Hatchback", "Luxury"];
+  const carTypes = ["Hatchback", "Sedan", "SUV", "Luxury"];
   const [selectedCar, setSelectedCar] = useState(carTypes[0]);
   const [selectedServiceType, setSelectedServiceType] = useState("");
   const [selectedPlan, setSelectedPlan] = useState("");
@@ -117,12 +117,13 @@ const Booking = () => {
           />
         );
       case 3:
-        // ===== Pass isPremiumAddons and heading text for customisation =====
+        // ===== Pass selectedCar to ServiceSelection =====
         return (
           <ServiceSelection
             selectedServices={selectedServices}
             onServicesChange={setSelectedServices}
             isPremiumAddons={isPremiumAddons}
+            selectedCar={selectedCar}
           />
         );
       case 4:

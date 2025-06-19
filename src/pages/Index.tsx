@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import Header from "@/components/Header";
 import Cart from "@/components/Cart";
@@ -9,7 +10,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import SocialIcons from "@/components/SocialIcons";
-import { PhoneCall } from "lucide-react"; // <-- Add this import
+import { PhoneCall } from "lucide-react";
 
 const Index = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -34,8 +35,10 @@ const Index = () => {
         <main>
           <HeroSection />
           <ServicesSection />
-          <AboutSection />
-          <WhoWeAre/>
+          <div id="about">
+            <AboutSection />
+            <WhoWeAre/>
+          </div>
           <TestimonialsSection />
           <ContactSection />
         </main>
@@ -49,7 +52,7 @@ const Index = () => {
       {/* Floating phone call button */}
       <a
         href="tel:8920230357"
-        className="fixed bottom-16 right-6 z-50 bg-green-400 hover:bg-green-500 shadow-lg rounded-full p-4 flex items-center transition-transform active:scale-95"
+        className="fixed bottom-20 right-6 z-50 bg-green-400 hover:bg-green-500 shadow-lg rounded-full p-4 flex items-center transition-transform active:scale-95"
         style={{ boxShadow: '0 2px 16px rgba(0,255,100,0.20)' }}
         aria-label="Call us"
       >
