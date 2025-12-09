@@ -7,8 +7,23 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="bg-black min-h-screen flex items-center px-4 py-12 md:px-6 md:py-20">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center w-full">
+    <section className="relative bg-black min-h-screen flex items-center px-4 py-12 md:px-6 md:py-20 overflow-hidden">
+      {/* Background Video */}
+      <div className="absolute inset-0 z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-60"
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center w-full">
         {/* Text Section */}
         <div className="flex flex-col justify-center space-y-6">
           <motion.h1
@@ -32,8 +47,6 @@ const HeroSection = () => {
           >
             We deliver expert car detailing services at your location — fast, eco-friendly, and convenient.
           </motion.p>
-
-          {/* Book Now button removed */}
         </div>
 
         {/* Image Section with glowing background & animation */}
@@ -43,7 +56,7 @@ const HeroSection = () => {
 
           {/* Animated illustration */}
           <motion.img
-            src="/sedan.png" // Replace with your illustration path
+            src="/sedan.png"
             alt="Car Wash Illustration"
             className="relative w-64 md:w-96 h-auto drop-shadow-lg"
             animate={{ y: [0, -15, 0] }}
